@@ -1,17 +1,21 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import RainyAlleyIllustration from '../components/RainyAlleyIllustration';
 import { aiScenes, lessonOneSlides } from '../data/lesson1';
 
 function SlideVisual({ visual }: { visual: (typeof lessonOneSlides)[number]['visual'] }) {
   if (visual === 'cover') {
-    return <div className="slide-book"><span>상상</span><span>문장</span><span>AI</span></div>;
+    return (
+      <figure className="presentation-cover-art">
+        <img src="/assets/lesson-01/cover-human-ai.png" alt="한 문장을 읽고 상상한 장면과 AI 결과를 비교하는 학생" />
+        <figcaption>사람의 상상 × AI의 결과</figcaption>
+      </figure>
+    );
   }
   if (visual === 'question') {
-    return <div className="giant-question">?</div>;
+    return <div className="question-board"><span>사람</span><b>?</b><span>AI</span><small>같은 문장 · 다른 바탕</small></div>;
   }
   if (visual === 'memory') {
-    return <div className="memory-clouds"><span>영상 추천</span><span>음성 비서</span><span>얼굴 인식</span><span>번역</span></div>;
+    return <div className="memory-list"><span><b>01</b>추천</span><span><b>02</b>음성</span><span><b>03</b>인식</span><span><b>04</b>번역</span></div>;
   }
   if (visual === 'ai-scenes' || visual === 'activity') {
     return (
@@ -21,30 +25,30 @@ function SlideVisual({ visual }: { visual: (typeof lessonOneSlides)[number]['vis
     );
   }
   if (visual === 'prompt') {
-    return <blockquote className="slide-prompt">비 오는 날, 빨간 우산을 쓴 아이가 골목길을 걷고 있습니다.</blockquote>;
+    return <figure className="prompt-picture"><img src="/assets/lesson-01/rainy-alley.png" alt="비 오는 골목길에서 빨간 우산을 쓴 아이" /><figcaption>그림에 있지만 문장에는 없는 것은?</figcaption></figure>;
   }
   if (visual === 'imagination') {
-    return <div className="imagination-map"><span>표정</span><span>시간</span><span>분위기</span><span>비</span><strong>나의 경험</strong></div>;
+    return <div className="imagination-sheet"><strong>내가 떠올린 장면</strong><span>표정</span><span>시간</span><span>분위기</span><span>비의 모습</span><small>그림이나 메모로 표현해 봅시다.</small></div>;
   }
   if (visual === 'teacher-demo') {
     return <div className="tool-demo"><span>같은 문장</span><strong>AI 이미지 생성 도구</strong><span>결과 관찰</span></div>;
   }
   if (visual === 'compare') {
-    return <div className="slide-compare"><div><span>사람</span><strong>내 상상</strong></div><div><RainyAlleyIllustration compact /></div></div>;
+    return <div className="slide-compare"><div className="student-sketch"><span>사람</span><strong>내 상상</strong><i /></div><figure><img src="/assets/lesson-01/rainy-alley.png" alt="교사가 실제 AI 결과로 교체할 비교용 예시" /><figcaption>AI 결과 예시 · 수업 전 교체</figcaption></figure></div>;
   }
   if (visual === 'same-different') {
-    return <div className="venn"><span>같은 점</span><span>다른 점</span></div>;
+    return <div className="observation-chart"><section><strong>같았던 점</strong><span>두 그림에 모두 보이는 것은?</span></section><section><strong>달랐던 점</strong><span>표정·시간·분위기는?</span></section><small>“그림의 ○○ 부분을 보면…”</small></div>;
   }
   if (visual === 'why') {
     return <div className="why-flow"><span>같은 문장</span><b>→</b><span>서로 다른 바탕</span><b>→</b><span>서로 다른 결과</span></div>;
   }
   if (visual === 'human') {
-    return <div className="concept-visual human-visual"><span>경험</span><span>기억</span><span>느낌</span><strong>사람의 상상</strong></div>;
+    return <div className="concept-notes human-notes"><span><b>경험</b>예전에 본 골목</span><span><b>기억</b>우산을 썼던 날</span><span><b>느낌</b>비 오는 날의 마음</span></div>;
   }
   if (visual === 'ai') {
-    return <div className="concept-visual ai-visual"><span>문자</span><span>이미지</span><span>패턴</span><strong>AI의 결과</strong></div>;
+    return <div className="concept-notes ai-notes"><span><b>자료</b>많은 문장과 이미지</span><span><b>특징</b>비슷한 관계 찾기</span><span><b>결과</b>새 장면 만들기</span></div>;
   }
-  return <div className="summary-stamp">LOOK<br /><small>보고 · 비교하고 · 설명하기</small></div>;
+  return <div className="summary-board"><strong>오늘의 한 문장</strong><span>사람은 경험으로,</span><span>AI는 데이터로 이해합니다.</span><small>보고 · 비교하고 · 근거로 설명하기</small></div>;
 }
 
 export default function PresentationPage() {
@@ -58,6 +62,8 @@ export default function PresentationPage() {
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest('button, a, input, textarea, select, [contenteditable="true"]')) return;
       if (['ArrowRight', 'PageDown', ' '].includes(event.key)) move(1);
       if (['ArrowLeft', 'PageUp'].includes(event.key)) move(-1);
       if (event.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();

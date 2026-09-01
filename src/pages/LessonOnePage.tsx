@@ -28,6 +28,7 @@ function ChoiceGroup({
             type="button"
             key={option}
             className={value === option ? 'choice-pill selected' : 'choice-pill'}
+            aria-pressed={value === option}
             onClick={() => onChange(option)}
           >
             {option}
@@ -50,9 +51,16 @@ export default function LessonOnePage() {
   }, [progress]);
 
   useEffect(() => {
-    const sync = () => {
-      setLessonOpen(isLessonOpen());
-      setDemoImage(localStorage.getItem(STORAGE_KEYS.demoImage) || '');
+    const sync = (event: StorageEvent) => {
+      if (event.key === STORAGE_KEYS.progress) {
+        setProgress(readProgress());
+        setCheckedAi(false);
+        setConceptChecked(false);
+      }
+      if (event.key === STORAGE_KEYS.lessonOpen) setLessonOpen(isLessonOpen());
+      if (event.key === STORAGE_KEYS.demoImage) {
+        setDemoImage(localStorage.getItem(STORAGE_KEYS.demoImage) || '');
+      }
     };
     window.addEventListener('storage', sync);
     return () => window.removeEventListener('storage', sync);
@@ -129,7 +137,7 @@ export default function LessonOnePage() {
           <Link className="text-link no-print" to="/">10차시 목록</Link>
         </section>
 
-        <ProgressRail current={progress.step} />
+        <ProgressRail current={progress.step - 1} />
 
         {progress.step === 0 && (
           <section className="activity-stage intro-stage">
@@ -188,7 +196,7 @@ export default function LessonOnePage() {
               })}
             </div>
             {checkedAi && (
-              <div className={aiResult.correct ? 'feedback success' : 'feedback notice'}>
+              <div className={aiResult.correct ? 'feedback success' : 'feedback notice'} role="status" aria-live="polite">
                 <strong>{aiResult.correct ? '모두 잘 찾았습니다!' : `${aiResult.total}개 중 ${aiResult.count}개의 AI 장면을 찾았어요.`}</strong>
                 <span>카드 아래 설명을 읽고 선택을 다시 살펴봐도 좋습니다.</span>
               </div>
@@ -288,7 +296,7 @@ export default function LessonOnePage() {
                 )}
               </article>
               <article className="compare-panel">
-                <div className="compare-title"><span>AI</span><strong>AI가 만든 그림</strong></div>
+                <div className="compare-title"><span>AI</span><strong>{demoImage ? 'AI가 만든 그림' : '비교용 예시 이미지'}</strong></div>
                 {demoImage ? (
                   <img src={demoImage} alt="교사가 등록한 AI 생성 이미지" />
                 ) : (
@@ -340,6 +348,7 @@ export default function LessonOnePage() {
                     type="button"
                     key={option}
                     className={progress.humanBasis === option ? 'concept-choice selected' : 'concept-choice'}
+                    aria-pressed={progress.humanBasis === option}
                     onClick={() => {
                       setConceptChecked(false);
                       update({ humanBasis: option });
@@ -357,6 +366,7 @@ export default function LessonOnePage() {
                     type="button"
                     key={option}
                     className={progress.aiBasis === option ? 'concept-choice selected' : 'concept-choice'}
+                    aria-pressed={progress.aiBasis === option}
                     onClick={() => {
                       setConceptChecked(false);
                       update({ aiBasis: option });
@@ -368,7 +378,7 @@ export default function LessonOnePage() {
               </article>
             </div>
             {conceptChecked && (
-              <div className={conceptCorrect ? 'feedback success' : 'feedback notice'}>
+              <div className={conceptCorrect ? 'feedback success' : 'feedback notice'} role="status" aria-live="polite">
                 <strong>{conceptCorrect ? '핵심을 정확히 찾았습니다.' : '두 그림을 만들 때 무엇을 바탕으로 했는지 다시 생각해 보세요.'}</strong>
                 <span>사람은 경험과 기억을 떠올리고, AI는 학습한 데이터에서 비슷한 특징을 찾습니다.</span>
               </div>

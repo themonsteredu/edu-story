@@ -7,7 +7,7 @@ export default function AnswerKeyPage() {
       <article className="print-sheet answer-sheet">
         <header className="sheet-header answer-header">
           <div><span>교사용 자료</span><h1>1차시 활동지 답안 및 발문</h1><p>사람과 AI, 누가 더 잘 볼까?</p></div>
-          <strong>3035</strong>
+          <strong>TEACHER</strong>
         </header>
         <section className="answer-section">
           <h2><b>1</b> 생활 속 AI 찾기</h2>

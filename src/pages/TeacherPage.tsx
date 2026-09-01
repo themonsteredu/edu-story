@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import AppShell from '../components/AppShell';
 import RainyAlleyIllustration from '../components/RainyAlleyIllustration';
 import { initialProgress, isLessonOpen, isTeacherAuthenticated, STORAGE_KEYS } from '../utils/storage';
+import lessonPlanUrl from '../assets/teacher/03_1차시_교수학습과정안.docx?url';
+import answerKeyUrl from '../assets/teacher/04_1차시_교사용답안.docx?url';
 
 const downloads = [
   {
@@ -21,13 +23,13 @@ const downloads = [
     type: 'DOCX',
     title: '교수·학습 과정안',
     description: '학교 제출용 본시 지도안',
-    href: '/resources/lesson-01/03_1차시_교수학습과정안.docx',
+    href: lessonPlanUrl,
   },
   {
     type: 'DOCX',
     title: '교사용 답안',
     description: '예상 답안·발문·지도 유의점',
-    href: '/resources/lesson-01/04_1차시_교사용답안.docx',
+    href: answerKeyUrl,
   },
 ];
 
@@ -161,6 +163,7 @@ export default function TeacherPage() {
                 type="button"
                 className={open ? 'toggle on' : 'toggle'}
                 aria-pressed={open}
+                aria-label={`학생 활동 공개 ${open ? '끄기' : '켜기'}`}
                 onClick={() => setLessonState(!open)}
               >
                 <span />

@@ -31,13 +31,10 @@ export default function HomePage() {
               <Link className="button secondary" to="/teacher">교사 설정</Link>
             </div>
           </div>
-          <div className="hero-visual" aria-hidden="true">
-            <div className="book-stack">
-              <span className="book-page page-one">사람의 상상</span>
-              <span className="book-page page-two">AI의 데이터</span>
-              <span className="book-page page-three">우리의 이야기</span>
-            </div>
-          </div>
+          <figure className="hero-visual">
+            <img src="/assets/lesson-01/cover-human-ai.png" alt="한 문장을 읽고 비 오는 골목을 상상하며 AI 결과와 비교하는 학생" />
+            <figcaption>사람의 상상과 AI의 결과를 관찰하고 비교하는 프로젝트 수업</figcaption>
+          </figure>
         </section>
 
         <section className="program-strip" aria-label="프로그램 개요">

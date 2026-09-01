@@ -7,6 +7,7 @@ export default function ProgressRail({ current }: { current: number }) {
         <li
           key={label}
           className={`${index === current ? 'current' : ''} ${index < current ? 'done' : ''}`}
+          aria-current={index === current ? 'step' : undefined}
         >
           <span>{index < current ? '✓' : index + 1}</span>
           <strong>{label}</strong>

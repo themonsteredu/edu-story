@@ -43,7 +43,7 @@ export default function LessonPlanPage() {
         <section className="assessment-grid">
           <div><h2>평가 관점</h2><p>생활 속 AI 사례를 근거와 함께 구분하는가?</p><p>그림의 같은 점과 다른 점을 관찰하여 설명하는가?</p><p>사람과 AI의 이해 방식 차이를 핵심 낱말로 말하는가?</p></div>
           <div><h2>준비물</h2><p>교사용 PPT, 학생용 웹앱 또는 태블릿, A4 활동지, AI 이미지 생성 도구, 화면 공유 장치</p></div>
-          <div><h2>수업 전 설정</h2><p>교사 설정 비밀번호 3035로 접속 → AI 시연 이미지 준비 → 학생 활동 공개 → 발표 화면 전체화면 실행</p></div>
+          <div><h2>수업 전 설정</h2><p>교사 설정 로그인 → AI 시연 이미지 준비 → 학생 활동 공개 → 발표 화면 전체화면 실행</p></div>
         </section>
         <footer className="sheet-footer"><span>운영 학교의 해당 학년 교육과정과 대조 후 성취기준 번호 확정</span><span>더몬스터학원 · EDU STORY</span></footer>
       </article>

@@ -1,4 +1,4 @@
-name: Generate lesson 01 resources
+name: Generate lesson 01 documents
 
 on:
   workflow_dispatch:
@@ -34,12 +34,15 @@ jobs:
           base64 --decode scripts/generate_resources.py.gz.b64 | gzip --decompress > scripts/generate_resources.py
           python scripts/generate_resources.py
           rm scripts/generate_resources.py
+          mkdir -p src/assets/teacher
+          mv public/resources/lesson-01/03_1차시_교수학습과정안.docx src/assets/teacher/03_1차시_교수학습과정안.docx
+          mv public/resources/lesson-01/04_1차시_교사용답안.docx src/assets/teacher/04_1차시_교사용답안.docx
 
-      - name: Commit generated PPTX and DOCX files
+      - name: Commit generated DOCX files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/resources/lesson-01
+          git add public/resources/lesson-01/02_1차시_학생활동지.docx src/assets/teacher
           if git diff --cached --quiet; then
             echo "Generated files are already current."
           else

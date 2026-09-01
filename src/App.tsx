@@ -7,6 +7,7 @@ import WorksheetPage from './pages/resources/WorksheetPage';
 import LessonPlanPage from './pages/resources/LessonPlanPage';
 import AnswerKeyPage from './pages/resources/AnswerKeyPage';
 import PrepChecklistPage from './pages/resources/PrepChecklistPage';
+import TeacherOnlyRoute from './components/TeacherOnlyRoute';
 
 export default function App() {
   return (
@@ -15,10 +16,12 @@ export default function App() {
       <Route path="/lesson/1" element={<LessonOnePage />} />
       <Route path="/present/1" element={<PresentationPage />} />
       <Route path="/teacher" element={<TeacherPage />} />
-      <Route path="/teacher/resources/lesson-1/worksheet" element={<WorksheetPage />} />
-      <Route path="/teacher/resources/lesson-1/lesson-plan" element={<LessonPlanPage />} />
-      <Route path="/teacher/resources/lesson-1/answer-key" element={<AnswerKeyPage />} />
-      <Route path="/teacher/resources/lesson-1/prep" element={<PrepChecklistPage />} />
+      <Route element={<TeacherOnlyRoute />}>
+        <Route path="/teacher/resources/lesson-1/worksheet" element={<WorksheetPage />} />
+        <Route path="/teacher/resources/lesson-1/lesson-plan" element={<LessonPlanPage />} />
+        <Route path="/teacher/resources/lesson-1/answer-key" element={<AnswerKeyPage />} />
+        <Route path="/teacher/resources/lesson-1/prep" element={<PrepChecklistPage />} />
+      </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
