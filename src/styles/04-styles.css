@@ -125,18 +125,6 @@
   font-size: 11px;
 }
 
-.slide-prompt {
-  margin: 0;
-  padding: 45px;
-  border-left: 10px solid var(--green);
-  color: #244c48;
-  background: #e6f0eb;
-  border-radius: 0 24px 24px 0;
-  font-size: 32px;
-  line-height: 1.6;
-  font-weight: 700;
-}
-
 .imagination-map,
 .concept-visual {
   position: relative;
@@ -247,10 +235,6 @@
 .slide-compare strong {
   margin-top: 10px;
   font-size: 28px;
-}
-
-.slide-compare .rain-illustration {
-  min-height: 300px;
 }
 
 .venn {

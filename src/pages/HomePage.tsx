@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom';
 import AppShell from '../components/AppShell';
 
 const lessons = [
-  ['1', '사람과 AI, 누가 더 잘 볼까?', '생활 속 AI와 사람·AI의 이해 방식 비교', 'Look'],
+  ['1', '자동으로 움직이면 모두 AI일까?', '추천·인식·분류와 자동기계 구별', 'Look'],
   ['2', '우리가 만들 이야기 정하기', '옛이야기의 인물·사건·배경과 6장면 구성', 'Look'],
   ['3', 'AI가 이해하는 데이터', '문자·이미지·소리 데이터 구분', 'Explore'],
-  ['4', '이야기를 데이터로 바꾸기', '장면 데이터 표와 프롬프트 문장', 'Explore'],
+  ['4', '이야기를 데이터로 바꾸기', '장면 데이터 표와 구체적인 설명문', 'Explore'],
   ['5', '이야기 감정 그래프 만들기', '감정을 수치로 바꾸고 그래프로 표현', 'Explore'],
-  ['6', '장면에 어울리는 소리 넣기', '감정 흐름에 맞는 음악과 효과음', 'Explore'],
-  ['7', '캔바로 그림책 한 컷 만들기', '데이터를 바탕으로 이미지 생성·수정', 'Act'],
+  ['6', '장면에 어울리는 소리 넣기', '공개 음원과 효과음 고르기', 'Explore'],
+  ['7', '우리 손으로 그림책 한 컷 만들기', '손그림과 디지털 편집으로 장면 구성', 'Act'],
   ['8', '책장이 넘어가는 우리 그림책', '6장면과 소리를 이어 플립북 완성', 'Act'],
-  ['9', 'AI가 만든 그림책, 무엇을 조심할까', '저작권·초상권·개인정보 점검', 'Practice'],
+  ['9', '디지털 그림책, 무엇을 조심할까', '저작권·초상권·개인정보 점검', 'Practice'],
   ['10', '그림책 발표회와 우리 반 AI 약속', '작품 감상과 바른 AI 활용 약속', 'Practice'],
 ];
 
@@ -20,21 +20,54 @@ export default function HomePage() {
       <main>
         <section className="home-hero">
           <div className="hero-copy">
-            <span className="eyebrow">초등 3~4학년 · AI+교과 융합 교육과정</span>
+            <span className="eyebrow">AI+교과 융합 프로젝트 · 초등 3~4학년</span>
             <h1>AI와 함께 만드는 우리 옛이야기 그림책</h1>
             <p>
-              사람과 AI의 이해 방식 차이를 살펴보고, 이야기를 데이터로 정리한 뒤
-              그림·소리·플립북으로 완성하는 10차시 프로젝트입니다.
+              생활 속 AI를 바르게 이해하고, 이야기를 데이터로 정리한 뒤
+              직접 만든 그림·소리·플립북으로 완성하는 10차시 프로젝트입니다.
             </p>
             <div className="hero-actions">
-              <Link className="button primary" to="/lesson/1">1차시 시작하기</Link>
-              <Link className="button secondary" to="/teacher">교사 설정</Link>
+              <Link className="button primary" to="/present/1">수업용 PPT</Link>
+              <Link className="button secondary" to="/lesson/1">학생용 웹앱 <small>선택</small></Link>
             </div>
+            <span className="hero-edition">LESSON 01 · LOOK</span>
           </div>
           <figure className="hero-visual">
-            <img src="/assets/lesson-01/cover-human-ai.webp" alt="한 문장을 읽고 비 오는 골목을 상상하며 AI 결과와 비교하는 학생" />
-            <figcaption>사람의 상상과 AI의 결과를 관찰하고 비교하는 프로젝트 수업</figcaption>
+            <img src="/assets/lesson-01/classroom-real.webp" alt="교실에서 학생들이 종이 활동을 하는 실제 사진" />
+            <figcaption>생활 속 AI의 작동 방식을 실제 사례로 관찰합니다.</figcaption>
           </figure>
+        </section>
+
+        <section className="home-launch section-wrap" aria-labelledby="lesson-one-launch">
+          <div className="launch-heading">
+            <span className="eyebrow">1차시 기본 운영</span>
+            <h2 id="lesson-one-launch">자동으로 움직이면 모두 AI일까?</h2>
+            <p>교사는 PPT를 진행하고, 학생은 종이 활동지에 분류 근거를 기록합니다.</p>
+          </div>
+          <div className="launch-options">
+            <article className="launch-option primary-option">
+              <span className="launch-number">01</span>
+              <div>
+                <small>교사용</small>
+                <h3>수업용 PPT</h3>
+                <p>추천·인식·분류와 자동기계를 실제 사례로 구별하는 수업을 진행합니다.</p>
+              </div>
+              <Link className="button primary" to="/present/1">PPT 시작하기</Link>
+            </article>
+            <article className="launch-option">
+              <span className="launch-number">02</span>
+              <div>
+                <small>학생 활동</small>
+                <h3>활동지로 기록하기</h3>
+                <p>학생은 여덟 가지 사례를 분류하고 선택한 근거를 A4 활동지에 씁니다.</p>
+              </div>
+              <Link className="button secondary" to="/teacher">활동지·교사자료</Link>
+            </article>
+          </div>
+          <p className="optional-webapp-note">
+            활동지·지도안·교사용 답안은 <Link to="/teacher">교사 설정(3035)</Link>에 있습니다.
+            태블릿을 쓰는 수업에서만 <Link to="/lesson/1">학생용 웹앱</Link>을 선택해 주세요.
+          </p>
         </section>
 
         <section className="program-strip" aria-label="프로그램 개요">
@@ -60,7 +93,7 @@ export default function HomePage() {
                   <p>{description}</p>
                 </div>
                 {index === 0 ? (
-                  <Link className="lesson-link" to="/lesson/1">수업 열기 →</Link>
+                  <Link className="lesson-link" to="/present/1">수업 PPT →</Link>
                 ) : (
                   <span className="lesson-link muted">순차 제작</span>
                 )}

@@ -280,18 +280,6 @@
   gap: 12px;
 }
 
-.prompt-card {
-  margin: 0 0 30px;
-  padding: 23px 28px;
-  color: #274e4a;
-  background: #e5efeb;
-  border-left: 6px solid var(--green);
-  border-radius: 0 14px 14px 0;
-  font-size: clamp(20px, 2.7vw, 31px);
-  line-height: 1.6;
-  font-weight: 700;
-}
-
 .imagination-layout {
   display: grid;
   grid-template-columns: minmax(310px, 0.9fr) minmax(0, 1.1fr);
@@ -370,13 +358,6 @@
   box-shadow: 0 0 0 3px rgba(31, 93, 89, 0.1);
 }
 
-.sketch-pad {
-  border: 1px solid #becbc5;
-  border-radius: 17px;
-  overflow: hidden;
-  background: #fffdf7;
-}
-
 .sketch-toolbar {
   min-height: 54px;
   padding: 12px 15px;
@@ -390,25 +371,10 @@
   font-size: 12px;
 }
 
-.sketch-pad canvas {
-  width: 100%;
-  display: block;
-  aspect-ratio: 800 / 420;
-  touch-action: none;
-  cursor: crosshair;
-}
-
 .compare-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 18px;
-}
-
-.compare-panel {
-  border: 1px solid #c4d0ca;
-  border-radius: 17px;
-  overflow: hidden;
-  background: #fff;
 }
 
 .compare-title {
@@ -433,14 +399,6 @@
 
 .compare-title strong {
   font-size: 14px;
-}
-
-.compare-panel > img,
-.compare-panel .rain-illustration {
-  width: 100%;
-  height: 330px;
-  object-fit: contain;
-  background: #f1eee5;
 }
 
 .text-imagination {
@@ -471,29 +429,6 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-}
-
-.rain-illustration {
-  position: relative;
-  overflow: hidden;
-  background: #dde7e7;
-}
-
-.rain-illustration svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.illustration-label {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  padding: 6px 9px;
-  color: #fff;
-  background: rgba(26, 54, 54, 0.72);
-  border-radius: 5px;
-  font-size: 9px;
 }
 
 .concept-stage {

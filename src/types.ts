@@ -1,20 +1,13 @@
-export type Imagination = {
-  expression: string;
-  time: string;
-  mood: string;
-  rain: string;
-  note: string;
-  sketch: string;
-};
+export type AiFunction = '추천' | '인식' | '분류' | '자동기계';
 
 export type LessonOneProgress = {
   step: number;
   selectedAiScenes: string[];
-  imagination: Imagination;
-  samePoint: string;
-  differentPoint: string;
-  humanBasis: string;
+  functionAnswers: Record<string, AiFunction>;
+  evidenceCase: string;
+  evidenceReason: string;
   aiBasis: string;
+  automaticBasis: string;
   reflection: string;
   completed: boolean;
   updatedAt: string;
@@ -28,16 +21,17 @@ export type Slide = {
   visual:
     | 'cover'
     | 'question'
-    | 'memory'
+    | 'observation'
     | 'ai-scenes'
-    | 'activity'
-    | 'prompt'
-    | 'imagination'
-    | 'teacher-demo'
-    | 'compare'
-    | 'same-different'
-    | 'why'
-    | 'human'
-    | 'ai'
+    | 'worksheet'
+    | 'automatic'
+    | 'ai-data'
+    | 'functions'
+    | 'recommendation'
+    | 'recognition'
+    | 'classification'
+    | 'sort'
+    | 'answer'
+    | 'caution'
     | 'summary';
 };

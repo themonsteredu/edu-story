@@ -11,14 +11,15 @@ export default function AppShell({ children, compact = false }: Props) {
     <div className={compact ? 'app-shell compact-shell' : 'app-shell'}>
       <header className="site-header no-print">
         <Link to="/" className="brand" aria-label="홈으로 이동">
-          <span className="brand-mark">책</span>
+          <span className="brand-mark">01</span>
           <span>
-            <strong>EDU STORY</strong>
-            <small>AI+교과 융합수업</small>
+            <strong>우리 옛이야기 그림책</strong>
+            <small>AI+교과 융합 수업</small>
           </span>
         </Link>
         <nav aria-label="주요 메뉴">
-          <Link to="/lesson/1">1차시 학생활동</Link>
+          <Link to="/present/1">수업용 PPT</Link>
+          <Link to="/lesson/1">학생용 웹앱</Link>
           <Link to="/teacher">교사 설정</Link>
         </nav>
       </header>

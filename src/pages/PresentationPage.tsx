@@ -1,54 +1,142 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { aiScenes, lessonOneSlides } from '../data/lesson1';
+import { aiScenes, functionCases, lessonOneSlides } from '../data/lesson1';
+
+function PhotoPair({
+  left,
+  leftLabel,
+  right,
+  rightLabel,
+}: {
+  left: string;
+  leftLabel: string;
+  right: string;
+  rightLabel: string;
+}) {
+  return (
+    <div className="editorial-compare">
+      <figure><img src={left} alt="" /><figcaption>{leftLabel}</figcaption></figure>
+      <figure><img src={right} alt="" /><figcaption>{rightLabel}</figcaption></figure>
+    </div>
+  );
+}
 
 function SlideVisual({ visual }: { visual: (typeof lessonOneSlides)[number]['visual'] }) {
   if (visual === 'cover') {
     return (
       <figure className="presentation-cover-art">
-        <img src="/assets/lesson-01/cover-human-ai.webp" alt="한 문장을 읽고 상상한 장면과 AI 결과를 비교하는 학생" />
-        <figcaption>사람의 상상 × AI의 결과</figcaption>
+        <img src="/assets/lesson-01/classroom-real.webp" alt="교실에서 종이 활동을 하는 학생들의 실제 사진" />
+        <figcaption>관찰 기록 01 · 겉모습보다 작동 방식을 봅니다.</figcaption>
       </figure>
     );
   }
   if (visual === 'question') {
-    return <div className="question-board"><span>사람</span><b>?</b><span>AI</span><small>같은 문장 · 다른 바탕</small></div>;
-  }
-  if (visual === 'memory') {
-    return <div className="memory-list"><span><b>01</b>추천</span><span><b>02</b>음성</span><span><b>03</b>인식</span><span><b>04</b>번역</span></div>;
-  }
-  if (visual === 'ai-scenes' || visual === 'activity') {
     return (
-      <div className="slide-scene-grid">
-        {aiScenes.map((scene) => <span key={scene.id}><b>{scene.icon}</b>{scene.title}</span>)}
+      <div className="editorial-question">
+        <span>데이터에서 특징 찾기</span>
+        <strong>AI일까?</strong>
+        <span>정해진 조건대로 움직이기</span>
+        <small>자동으로 움직인다는 사실만으로는 구별할 수 없습니다.</small>
       </div>
     );
   }
-  if (visual === 'prompt') {
-    return <figure className="prompt-picture"><img src="/assets/lesson-01/rainy-alley.webp" alt="비 오는 골목길에서 빨간 우산을 쓴 아이" /><figcaption>그림에 있지만 문장에는 없는 것은?</figcaption></figure>;
+  if (visual === 'observation') {
+    return (
+      <div className="record-sheet">
+        <span><b>01</b>AI 기능 찾기</span>
+        <span><b>02</b>자동기계의 규칙 찾기</span>
+        <span><b>03</b>근거로 설명하기</span>
+        <small>추천 · 인식 · 분류 · 조건 · 순서</small>
+      </div>
+    );
   }
-  if (visual === 'imagination') {
-    return <div className="imagination-sheet"><strong>내가 떠올린 장면</strong><span>표정</span><span>시간</span><span>분위기</span><span>비의 모습</span><small>그림이나 메모로 표현해 봅시다.</small></div>;
+  if (visual === 'ai-scenes') {
+    return (
+      <div className="presentation-scene-contact">
+        {aiScenes.map((scene) => (
+          <figure key={scene.id}><img src={scene.image} alt="" /><figcaption>{scene.icon} · {scene.title}</figcaption></figure>
+        ))}
+      </div>
+    );
   }
-  if (visual === 'teacher-demo') {
-    return <div className="tool-demo"><span>같은 문장</span><strong>AI 이미지 생성 도구</strong><span>결과 관찰</span></div>;
+  if (visual === 'worksheet') {
+    return (
+      <div className="worksheet-directions">
+        <span><b>01</b>작동 설명에 밑줄 긋기</span>
+        <span><b>02</b>네 기능 중 하나 쓰기</span>
+        <span><b>03</b>짝에게 판단 근거 말하기</span>
+      </div>
+    );
   }
-  if (visual === 'compare') {
-    return <div className="slide-compare"><div className="student-sketch"><span>사람</span><strong>내 상상</strong><i /></div><figure><img src="/assets/lesson-01/rainy-alley.webp" alt="교사가 실제 AI 결과로 교체할 비교용 예시" /><figcaption>AI 결과 예시 · 수업 전 교체</figcaption></figure></div>;
+  if (visual === 'automatic') {
+    return <PhotoPair left="/assets/lesson-01/automatic-door-real.webp" leftLabel="움직임 감지 → 문 열림" right="/assets/lesson-01/ruler-real.webp" rightLabel="눈금 확인 → 사람이 길이 읽기" />;
   }
-  if (visual === 'same-different') {
-    return <div className="observation-chart"><section><strong>같았던 점</strong><span>두 그림에 모두 보이는 것은?</span></section><section><strong>달랐던 점</strong><span>표정·시간·분위기는?</span></section><small>“그림의 ○○ 부분을 보면…”</small></div>;
+  if (visual === 'ai-data') {
+    return <PhotoPair left="/assets/lesson-01/photo-classification-real.webp" leftLabel="사진의 특징을 비교" right="/assets/lesson-01/smart-speaker-real.webp" rightLabel="말소리의 특징을 인식" />;
   }
-  if (visual === 'why') {
-    return <div className="why-flow"><span>같은 문장</span><b>→</b><span>서로 다른 바탕</span><b>→</b><span>서로 다른 결과</span></div>;
+  if (visual === 'functions') {
+    return (
+      <div className="function-triad">
+        <section><small>01</small><strong>추천</strong><span>다음 것을 제안</span></section>
+        <section><small>02</small><strong>인식</strong><span>무엇인지 확인</span></section>
+        <section><small>03</small><strong>분류</strong><span>알맞은 모둠으로 구분</span></section>
+      </div>
+    );
   }
-  if (visual === 'human') {
-    return <div className="concept-notes human-notes"><span><b>경험</b>예전에 본 골목</span><span><b>기억</b>우산을 썼던 날</span><span><b>느낌</b>비 오는 날의 마음</span></div>;
+  if (visual === 'recommendation') {
+    return (
+      <div className="classification-record">
+        <figure><img src="/assets/lesson-01/streaming-real.webp" alt="리모컨으로 영상 서비스를 이용하는 실제 사진" /></figure>
+        <div><span>시청 기록</span><b>→</b><span>비슷한 특징 찾기</span><b>→</b><strong>다음 영상 제안</strong></div>
+      </div>
+    );
   }
-  if (visual === 'ai') {
-    return <div className="concept-notes ai-notes"><span><b>자료</b>많은 문장과 이미지</span><span><b>특징</b>비슷한 관계 찾기</span><span><b>결과</b>새 장면 만들기</span></div>;
+  if (visual === 'recognition') {
+    return <PhotoPair left="/assets/lesson-01/smart-speaker-real.webp" leftLabel="말소리 특징" right="/assets/lesson-01/face-recognition-real.webp" rightLabel="얼굴의 위치와 특징" />;
   }
-  return <div className="summary-board"><strong>오늘의 한 문장</strong><span>사람은 경험으로,</span><span>AI는 데이터로 이해합니다.</span><small>보고 · 비교하고 · 근거로 설명하기</small></div>;
+  if (visual === 'classification') {
+    return (
+      <div className="classification-record">
+        <figure><img src="/assets/lesson-01/photo-classification-real.webp" alt="휴대전화로 식물 사진을 촬영하는 실제 사진" /></figure>
+        <div><span>특징 찾기</span><b>→</b><span>비슷한 자료 모으기</span><b>→</b><strong>알맞은 이름 붙이기</strong></div>
+      </div>
+    );
+  }
+  if (visual === 'sort') {
+    return (
+      <div className="sort-board">
+        {(['추천', '인식', '분류', '자동기계'] as const).map((category) => (
+          <section key={category}>
+            <strong>{category}</strong>
+            {functionCases.filter((item) => item.category === category).map((item) => <span key={item.id}>{item.number} · {item.title}</span>)}
+          </section>
+        ))}
+      </div>
+    );
+  }
+  if (visual === 'answer') {
+    return (
+      <blockquote className="evidence-sentence-slide">
+        <small>근거 문장</small>
+        <strong>이 사례는 <u>어떤 정보</u>를 보고<br /><u>어떤 결과</u>를 내기 때문에<br />_____입니다.</strong>
+      </blockquote>
+    );
+  }
+  if (visual === 'caution') {
+    return (
+      <div className="caution-comparison">
+        <section><small>사례 A</small><strong>움직임이 감지되면 문이 열린다.</strong><span>정해진 조건과 동작</span></section>
+        <section><small>사례 B</small><strong>사람을 구별해 허가된 사람에게만 문이 열린다.</strong><span>학습된 특징으로 인식</span></section>
+      </div>
+    );
+  }
+  return (
+    <div className="editorial-summary">
+      <small>오늘의 한 문장</small>
+      <strong>AI는 데이터로 판단하고,<br />자동기계는 정해진 조건과 순서로 작동합니다.</strong>
+      <span>제품 이름보다 작동 설명을 근거로 판단하기</span>
+    </div>
+  );
 }
 
 export default function PresentationPage() {
@@ -86,11 +174,8 @@ export default function PresentationPage() {
           <span className="slide-kicker">{slide.kicker}</span>
           <h1>{slide.title}</h1>
           {slide.subtitle && <p>{slide.subtitle}</p>}
-          {slide.bullets && (
-            <ul>{slide.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
-          )}
-          {index === 4 && <Link className="button primary slide-launch" to="/lesson/1" target="_blank">학생 활동 열기</Link>}
-          {index === 8 && <Link className="button secondary slide-launch" to="/teacher" target="_blank">AI 시연 도구 열기</Link>}
+          {slide.bullets && <ul>{slide.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}
+          {index === 4 && <Link className="button primary slide-launch" to="/teacher/resources/lesson-1/worksheet" target="_blank">활동지 열기</Link>}
         </div>
         <div className="slide-visual"><SlideVisual visual={slide.visual} /></div>
       </section>
