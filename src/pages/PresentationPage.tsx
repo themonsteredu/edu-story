@@ -6,7 +6,7 @@ function SlideVisual({ visual }: { visual: (typeof lessonOneSlides)[number]['vis
   if (visual === 'cover') {
     return (
       <figure className="presentation-cover-art">
-        <img src="/assets/lesson-01/cover-human-ai.png" alt="한 문장을 읽고 상상한 장면과 AI 결과를 비교하는 학생" />
+        <img src="/assets/lesson-01/cover-human-ai.webp" alt="한 문장을 읽고 상상한 장면과 AI 결과를 비교하는 학생" />
         <figcaption>사람의 상상 × AI의 결과</figcaption>
       </figure>
     );
@@ -25,7 +25,7 @@ function SlideVisual({ visual }: { visual: (typeof lessonOneSlides)[number]['vis
     );
   }
   if (visual === 'prompt') {
-    return <figure className="prompt-picture"><img src="/assets/lesson-01/rainy-alley.png" alt="비 오는 골목길에서 빨간 우산을 쓴 아이" /><figcaption>그림에 있지만 문장에는 없는 것은?</figcaption></figure>;
+    return <figure className="prompt-picture"><img src="/assets/lesson-01/rainy-alley.webp" alt="비 오는 골목길에서 빨간 우산을 쓴 아이" /><figcaption>그림에 있지만 문장에는 없는 것은?</figcaption></figure>;
   }
   if (visual === 'imagination') {
     return <div className="imagination-sheet"><strong>내가 떠올린 장면</strong><span>표정</span><span>시간</span><span>분위기</span><span>비의 모습</span><small>그림이나 메모로 표현해 봅시다.</small></div>;
@@ -34,7 +34,7 @@ function SlideVisual({ visual }: { visual: (typeof lessonOneSlides)[number]['vis
     return <div className="tool-demo"><span>같은 문장</span><strong>AI 이미지 생성 도구</strong><span>결과 관찰</span></div>;
   }
   if (visual === 'compare') {
-    return <div className="slide-compare"><div className="student-sketch"><span>사람</span><strong>내 상상</strong><i /></div><figure><img src="/assets/lesson-01/rainy-alley.png" alt="교사가 실제 AI 결과로 교체할 비교용 예시" /><figcaption>AI 결과 예시 · 수업 전 교체</figcaption></figure></div>;
+    return <div className="slide-compare"><div className="student-sketch"><span>사람</span><strong>내 상상</strong><i /></div><figure><img src="/assets/lesson-01/rainy-alley.webp" alt="교사가 실제 AI 결과로 교체할 비교용 예시" /><figcaption>AI 결과 예시 · 수업 전 교체</figcaption></figure></div>;
   }
   if (visual === 'same-different') {
     return <div className="observation-chart"><section><strong>같았던 점</strong><span>두 그림에 모두 보이는 것은?</span></section><section><strong>달랐던 점</strong><span>표정·시간·분위기는?</span></section><small>“그림의 ○○ 부분을 보면…”</small></div>;
