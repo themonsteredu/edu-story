@@ -31,8 +31,9 @@ jobs:
 
       - name: Restore and run generator
         run: |
-          base64 --decode scripts/generate_resources.py.gz.b64 | gzip --decompress > /tmp/generate_resources.py
-          python /tmp/generate_resources.py
+          base64 --decode scripts/generate_resources.py.gz.b64 | gzip --decompress > scripts/generate_resources.py
+          python scripts/generate_resources.py
+          rm scripts/generate_resources.py
 
       - name: Commit generated PPTX and DOCX files
         run: |
