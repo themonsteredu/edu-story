@@ -7,7 +7,7 @@ import answerKeyUrl from '../assets/teacher/04_1차시_교사용답안.docx?url'
 
 const downloads = [
   { type: 'PPTX', title: '1차시 수업 PPT', description: '15장 관찰·분류 수업 프레젠테이션', href: '/resources/lesson-01/01_1차시_수업PPT.pptx' },
-  { type: 'DOCX', title: '학생 활동지', description: 'A4 1장 분류·근거 기록지', href: '/resources/lesson-01/02_1차시_학생활동지.docx' },
+  { type: 'DOCX', title: '학생 활동지', description: 'A4 1장 ○표·선택형 활동지', href: '/resources/lesson-01/02_1차시_학생활동지.docx' },
   { type: 'DOCX', title: '교수·학습 과정안', description: '학교 제출용 본시 지도안', href: lessonPlanUrl },
   { type: 'DOCX', title: '교사용 답안', description: '분류 답안·발문·지도 유의점', href: answerKeyUrl },
 ];

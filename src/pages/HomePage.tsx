@@ -42,7 +42,7 @@ export default function HomePage() {
           <div className="launch-heading">
             <span className="eyebrow">1차시 기본 운영</span>
             <h2 id="lesson-one-launch">자동으로 움직이면 모두 AI일까?</h2>
-            <p>교사는 PPT를 진행하고, 학생은 종이 활동지에 분류 근거를 기록합니다.</p>
+            <p>교사는 PPT를 진행하고, 학생은 종이 활동지에 ○표하며 생각을 말합니다.</p>
           </div>
           <div className="launch-options">
             <article className="launch-option primary-option">
@@ -59,7 +59,7 @@ export default function HomePage() {
               <div>
                 <small>학생 활동</small>
                 <h3>활동지로 기록하기</h3>
-                <p>학생은 여덟 가지 사례를 분류하고 선택한 근거를 A4 활동지에 씁니다.</p>
+                <p>학생은 여덟 가지 사례에 ○표하고 선택한 까닭은 짝과 말로 나눕니다.</p>
               </div>
               <Link className="button secondary" to="/teacher">활동지·교사자료</Link>
             </article>

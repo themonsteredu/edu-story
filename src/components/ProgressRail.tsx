@@ -1,4 +1,4 @@
-const steps = ['AI 찾기', '기능 분류', '근거 쓰기', '개념 정리', '마무리'];
+const steps = ['AI 찾기', '기능 분류', '까닭 말하기', '개념 정리', '마무리'];
 
 export default function ProgressRail({ current }: { current: number }) {
   return (

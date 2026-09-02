@@ -81,7 +81,7 @@ export const lessonOneSlides: Slide[] = [
   { kicker: '오늘의 핵심 질문', title: '자동으로 움직이는 기계는 모두 AI일까요?', subtitle: '무엇을 보고, 어떤 방법으로 결과를 내는지 관찰합니다.', visual: 'question' },
   { kicker: '오늘의 목표', title: 'AI와 자동기계를 작동 근거로 구별해 봅시다.', bullets: ['추천·인식·분류 기능 찾기', '정해진 조건과 순서 찾기', '내 선택을 근거로 설명하기'], visual: 'observation' },
   { kicker: '활동 1', title: '생활 속 장면 여섯 가지를 자세히 봅시다.', subtitle: '겉모습보다 기기가 하는 일에 주목합니다.', visual: 'ai-scenes' },
-  { kicker: '학생 활동지 ①', title: '여덟 사례에 알맞은 기능 이름을 쓰세요.', subtitle: '추천 · 인식 · 분류 · 자동기계 중 하나를 고르고 까닭을 말합니다.', visual: 'worksheet' },
+  { kicker: '학생 활동지 ①', title: '여덟 사례에서 알맞은 기능 칸에 ○표하세요.', subtitle: '추천 · 인식 · 분류 · 자동기계 중 하나를 고르고 까닭은 짝과 말합니다.', visual: 'worksheet' },
   { kicker: '자동기계', title: '정해진 조건이 맞으면 정해진 동작을 합니다.', subtitle: '센서 자동문과 타이머는 이 수업에서 자동기계 사례로 봅니다.', visual: 'automatic' },
   { kicker: 'AI', title: '학습된 데이터를 이용해 특징을 찾고 결과를 냅니다.', subtitle: '어떤 정보를 사용했는지 살펴보면 AI 기능을 찾기 쉽습니다.', visual: 'ai-data' },
   { kicker: 'AI의 세 기능', title: '오늘은 추천·인식·분류를 살펴봅니다.', visual: 'functions' },
@@ -91,5 +91,5 @@ export const lessonOneSlides: Slide[] = [
   { kicker: '모둠 활동', title: '여덟 가지 사례를 네 영역으로 나누어 봅시다.', subtitle: '추천 · 인식 · 분류 · 자동기계', visual: 'sort' },
   { kicker: '함께 확인', title: '결과보다 선택한 근거를 먼저 말해 봅시다.', subtitle: '“이 사례는 ___ 정보를 보고 ___하기 때문입니다.”', visual: 'answer' },
   { kicker: '주의할 점', title: '같은 기기도 작동 방식에 따라 답이 달라질 수 있습니다.', subtitle: '제품 이름만 보지 말고 제시된 작동 설명을 읽습니다.', visual: 'caution' },
-  { kicker: '오늘의 정리', title: 'AI는 데이터로 판단하고, 자동기계는 정해진 조건과 순서로 작동합니다.', bullets: ['추천·인식·분류 기능을 찾았습니다.', '자동기계와 AI를 작동 근거로 구별했습니다.', '선택한 이유를 문장으로 설명했습니다.'], visual: 'summary' },
+  { kicker: '오늘의 정리', title: 'AI는 데이터로 판단하고, 자동기계는 정해진 조건과 순서로 작동합니다.', bullets: ['추천·인식·분류 기능을 찾았습니다.', '자동기계와 AI를 작동 근거로 구별했습니다.', '선택한 까닭을 짝과 말했습니다.'], visual: 'summary' },
 ];

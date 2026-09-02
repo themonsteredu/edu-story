@@ -6,6 +6,13 @@ import { aiScenes, functionCases, functionOptions } from '../data/lesson1';
 import type { AiFunction, LessonOneProgress } from '../types';
 import { initialProgress, readProgress, STORAGE_KEYS, writeProgress } from '../utils/storage';
 
+const evidenceOptions = [
+  '데이터의 특징을 살펴 결과를 냅니다.',
+  '정해진 조건이 맞으면 정해진 동작을 합니다.',
+];
+
+const reflectionOptions = ['잘 알겠어요', '조금 헷갈려요', '더 알아볼래요'];
+
 export default function LessonOnePage() {
   const [progress, setProgress] = useState<LessonOneProgress>(() => readProgress());
   const [checkedAi, setCheckedAi] = useState(false);
@@ -104,7 +111,7 @@ export default function LessonOnePage() {
               <div className="goal-list">
                 <div><span>01</span><strong>생활 속 AI 활용 장면 찾기</strong></div>
                 <div><span>02</span><strong>추천·인식·분류 기능 구별하기</strong></div>
-                <div><span>03</span><strong>작동 근거를 문장으로 설명하기</strong></div>
+                <div><span>03</span><strong>작동 까닭을 고르고 말하기</strong></div>
               </div>
               <button className="button primary large" onClick={() => setStep(1)}>활동 시작하기</button>
             </div>
@@ -205,7 +212,7 @@ export default function LessonOnePage() {
               {!checkedFunctions ? (
                 <button className="button primary" disabled={!functionReady} onClick={() => setCheckedFunctions(true)}>분류 확인하기</button>
               ) : (
-                <button className="button primary" onClick={() => setStep(3)}>근거 문장 쓰기</button>
+                <button className="button primary" onClick={() => setStep(3)}>까닭 고르기</button>
               )}
             </div>
           </section>
@@ -214,13 +221,13 @@ export default function LessonOnePage() {
         {progress.step === 3 && (
           <section className="activity-stage evidence-stage">
             <div className="stage-heading">
-              <span className="stage-label">활동 3 · 근거 쓰기</span>
-              <h2>한 사례를 골라 내가 분류한 까닭을 문장으로 설명하세요.</h2>
+              <span className="stage-label">활동 3 · 까닭 고르기</span>
+              <h2>한 사례를 고르고 알맞은 까닭을 선택하세요.</h2>
             </div>
             <div className="evidence-layout">
               <label className="text-field">
                 <span>설명할 사례</span>
-                <select value={progress.evidenceCase} onChange={(event) => update({ evidenceCase: event.target.value })}>
+                <select value={progress.evidenceCase} onChange={(event) => update({ evidenceCase: event.target.value, evidenceReason: '' })}>
                   <option value="">사례를 선택하세요</option>
                   {functionCases.map((item) => <option key={item.id} value={item.id}>{item.number} · {item.title}</option>)}
                 </select>
@@ -232,20 +239,24 @@ export default function LessonOnePage() {
                   <span>{selectedEvidenceCase.clue}</span>
                 </blockquote>
               )}
-              <label className="text-field evidence-writing">
-                <span>나의 근거</span>
-                <textarea
-                  value={progress.evidenceReason}
-                  onChange={(event) => update({ evidenceReason: event.target.value })}
-                  placeholder="예: 이 사례는 시청 기록을 보고 비슷한 영상을 제안하기 때문에 추천입니다."
-                  maxLength={220}
-                />
-              </label>
-              <p className="sentence-guide">“이 사례는 <b>어떤 정보</b>를 보고 <b>어떤 결과</b>를 내기 때문에 ___입니다.”</p>
+              <div className="evidence-choice-list" role="group" aria-label="분류한 까닭 선택">
+                {evidenceOptions.map((option) => (
+                  <button
+                    type="button"
+                    key={option}
+                    className={progress.evidenceReason === option ? 'concept-choice selected' : 'concept-choice'}
+                    aria-pressed={progress.evidenceReason === option}
+                    onClick={() => update({ evidenceReason: option })}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+              <p className="sentence-guide">고른 까닭을 짝에게 말해 보세요.</p>
             </div>
             <div className="stage-actions">
               <button className="button ghost" onClick={() => setStep(2)}>이전</button>
-              <button className="button primary" disabled={!progress.evidenceCase || progress.evidenceReason.trim().length < 8} onClick={() => setStep(4)}>개념 정리하기</button>
+              <button className="button primary" disabled={!progress.evidenceCase || !evidenceOptions.includes(progress.evidenceReason)} onClick={() => setStep(4)}>개념 정리하기</button>
             </div>
           </section>
         )}
@@ -278,16 +289,28 @@ export default function LessonOnePage() {
                 <span>AI는 학습된 데이터의 특징을 찾고, 자동기계는 정해진 조건과 순서에 따라 움직입니다.</span>
               </div>
             )}
-            <label className="text-field reflection-field">
-              <span>오늘 새롭게 알게 된 점</span>
-              <textarea value={progress.reflection} onChange={(event) => update({ reflection: event.target.value })} placeholder="한 문장으로 정리해 보세요." maxLength={180} />
-            </label>
+            <div className="reflection-choice-field">
+              <strong>오늘 나는 어땠나요? 하나를 고르세요.</strong>
+              <div role="group" aria-label="오늘의 이해 정도">
+                {reflectionOptions.map((option) => (
+                  <button
+                    type="button"
+                    key={option}
+                    className={progress.reflection === option ? 'concept-choice selected' : 'concept-choice'}
+                    aria-pressed={progress.reflection === option}
+                    onClick={() => update({ reflection: option })}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div className="stage-actions">
               <button className="button ghost" onClick={() => setStep(3)}>이전</button>
               {!conceptChecked || !conceptCorrect ? (
                 <button className="button primary" disabled={!progress.aiBasis || !progress.automaticBasis} onClick={() => setConceptChecked(true)}>선택 확인하기</button>
               ) : (
-                <button className="button primary" disabled={progress.reflection.trim().length < 2} onClick={() => { update({ completed: true }); setStep(5); }}>1차시 마무리</button>
+                <button className="button primary" disabled={!reflectionOptions.includes(progress.reflection)} onClick={() => { update({ completed: true }); setStep(5); }}>1차시 마무리</button>
               )}
             </div>
           </section>
@@ -297,12 +320,12 @@ export default function LessonOnePage() {
           <section className="activity-stage completion-stage">
             <span className="completion-mark">01</span>
             <span className="eyebrow">1차시 완료</span>
-            <h2>AI는 데이터로 판단하고,<br />자동기계는 정해진 조건과 순서로 작동합니다.</h2>
+            <h2>AI는 데이터로 판단하고, 자동기계는 정해진 조건과 순서로 작동합니다.</h2>
             <div className="completion-summary">
               <div><span>생활 속 AI</span><strong>{aiResult.count}개 장면의 작동 근거를 확인함</strong></div>
               <div><span>기능 분류</span><strong>{functionCases.length}개 중 {functionResult}개 분류</strong></div>
-              <div><span>나의 근거</span><strong>{progress.evidenceReason}</strong></div>
-              <div><span>나의 한 문장</span><strong>{progress.reflection}</strong></div>
+              <div><span>고른 까닭</span><strong>{progress.evidenceReason}</strong></div>
+              <div><span>나의 확인</span><strong>{progress.reflection}</strong></div>
             </div>
             <div className="completion-actions no-print">
               <button className="button secondary" onClick={() => window.print()}>내 활동 인쇄하기</button>
