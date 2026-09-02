@@ -23,7 +23,7 @@ export default function HomePage() {
             <span>AI+교과 융합 프로젝트 · 초등 3~4학년</span>
             <h1>AI와 함께 만드는 우리 옛이야기 그림책</h1>
             <p>
-              옛이야기를 자세히 읽고, 인물·사건·배경을 찾아 여섯 장면의 그림책으로 완성합니다.
+              옛이야기를 자세히 읽고, 사건 순서를 맞춘 뒤 내가 그리고 싶은 여섯 장면을 직접 기획합니다.
             </p>
             <dl>
               <div><dt>수업</dt><dd>총 10차시</dd></div>
@@ -61,7 +61,7 @@ export default function HomePage() {
             </article>
             <article className="current">
               <span>02</span>
-              <div><small>현재 수업 · LOOK</small><h3>우리가 만들 이야기 정하기</h3><p>사건 카드 여섯 개를 옮겨 이야기판을 완성합니다.</p></div>
+              <div><small>현재 수업 · LOOK</small><h3>우리가 만들 이야기 정하기</h3><p>사건 카드의 순서를 맞추고 여섯 장면의 인물·장소·느낌·모습을 직접 고릅니다.</p></div>
               <nav aria-label="2차시 실행">
                 <Link to="/present/2">수업용 PPT</Link>
                 <Link to="/lesson/2">학생용 웹앱</Link>

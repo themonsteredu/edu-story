@@ -116,7 +116,13 @@ function SlideVisual({ visual }: { visual: LessonTwoSlideVisual }) {
   if (visual === 'six-scenes') {
     return (
       <div className="lesson-two-slide-scenes">
-        {sampleEvents.map((event, index) => <section key={event}><span>{index + 1}</span><strong>{event}</strong></section>)}
+        {sampleEvents.map((event, index) => (
+          <section key={event}>
+            <span>{index + 1}</span>
+            <strong>{event}</strong>
+            <small>{index === 0 ? '여기서부터 내가 기획해요' : '장면 모습은 아직 비어 있어요'}</small>
+          </section>
+        ))}
       </div>
     );
   }
@@ -124,19 +130,28 @@ function SlideVisual({ visual }: { visual: LessonTwoSlideVisual }) {
   if (visual === 'details') {
     return (
       <div className="lesson-two-slide-details">
-        {['표정', '시간', '주변 모습', '중요한 물건', '소리'].map((item, index) => (
-          <section key={item}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item}</strong></section>
+        <small>2장면 · 산길에서 호랑이가 어머니를 만나요</small>
+        {[
+          ['누가', '어머니와 호랑이'],
+          ['어디', '어두운 산길'],
+          ['느낌', '무서워요'],
+          ['어떤 모습', '큰 입을 벌린 호랑이'],
+        ].map(([label, choice], index) => (
+          <section key={label}>
+            <span>{String(index + 1).padStart(2, '0')} · {label}</span>
+            <strong>{choice}</strong>
+          </section>
         ))}
-        <p>각 장면마다 하나씩 골라 짝에게 말해 보세요.</p>
+        <p>사건은 같아도 장면의 모습은 내가 다르게 고를 수 있어요.</p>
       </div>
     );
   }
 
   return (
     <div className="lesson-two-slide-summary">
-      <span>인물</span><span>배경</span><span>사건</span>
-      <strong>여섯 장면의 이야기 뼈대</strong>
-      <small>우리 모둠 이야기판 완성</small>
+      <span>사건 순서</span><span>장면 선택</span><span>나의 생각</span>
+      <strong>내가 기획한 여섯 장면</strong>
+      <small>정답표가 아니라 나의 그림책 계획입니다.</small>
     </div>
   );
 }

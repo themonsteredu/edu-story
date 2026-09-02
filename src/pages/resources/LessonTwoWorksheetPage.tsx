@@ -1,5 +1,5 @@
 import PrintToolbar from '../../components/PrintToolbar';
-import { lessonTwoDetailCategories, lessonTwoStories } from '../../data/lesson2';
+import { lessonTwoStories } from '../../data/lesson2';
 
 const displayOrder = [3, 0, 5, 2, 1, 4];
 
@@ -47,18 +47,23 @@ export default function LessonTwoWorksheetPage() {
               </div>
             </section>
 
-            <section className="lesson-two-paper-detail">
-              <h2><b>3</b> 각 장면에서 더 자세히 알려주고 싶은 것 하나씩 ○표하세요.</h2>
-              <table aria-label="장면별로 더 알려줄 정보 고르기">
-                <thead><tr><th>장면</th>{lessonTwoDetailCategories.map((item) => <th key={item}>{item}</th>)}</tr></thead>
-                <tbody>{story.events.map((event, index) => (
-                  <tr key={event.id}><th>{index + 1}</th>{lessonTwoDetailCategories.map((item) => <td key={item}>{item}</td>)}</tr>
-                ))}</tbody>
-              </table>
-              <p>글을 쓰지 않아도 됩니다. 고른 내용을 짝에게 말해 보세요.</p>
+            <section className="lesson-two-paper-plan">
+              <h2><b>3</b> 내가 맡은 장면 하나를 직접 기획해 보세요.</h2>
+              <div className="lesson-two-paper-plan-picker">
+                <strong>내 장면</strong>
+                {[1, 2, 3, 4, 5, 6].map((number) => <span key={number}>{number}</span>)}
+                <small>모둠원이 서로 다른 장면을 고르면 여섯 장면이 완성돼요.</small>
+              </div>
+              <div className="lesson-two-paper-plan-fields">
+                <div><strong>누가 나오나요?</strong><span>________________</span></div>
+                <div><strong>어디인가요?</strong><span>________________</span></div>
+                <div><strong>어떤 느낌인가요?</strong><span>밝게　·　무섭게　·　따뜻하게　·　신나게</span></div>
+                <div><strong>무엇을 크게 그릴까요?</strong><span>________________</span></div>
+              </div>
+              <div className="lesson-two-paper-sketch"><span>내가 그리고 싶은 장면을 간단히 그려 보세요.</span></div>
             </section>
 
-            <footer><span>LOOK · 인물·사건·배경 찾기</span><span>{storyIndex + 1} / {lessonTwoStories.length} · 더몬스터학원 EDU STORY</span></footer>
+            <footer><span>LOOK · 이야기 이해와 장면 기획</span><span>{storyIndex + 1} / {lessonTwoStories.length} · 더몬스터학원 EDU STORY</span></footer>
           </article>
         );
       })}

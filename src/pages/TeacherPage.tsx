@@ -7,8 +7,8 @@ const rawResourceBase = 'https://raw.githubusercontent.com/themonsteredu/edu-sto
 const rawTeacherAssetBase = 'https://raw.githubusercontent.com/themonsteredu/edu-story/main/src/assets/teacher';
 
 const lessonTwoDownloads = [
-  { type: 'PPTX', title: '2차시 수업 PPT', description: '13장 이야기 구성 수업 프레젠테이션', href: `${rawResourceBase}/lesson-02/01_2차시_수업PPT.pptx` },
-  { type: 'DOCX', title: '학생 활동지 3종', description: '이야기별 A4 한 장 · 선택·순서형', href: `${rawResourceBase}/lesson-02/02_2차시_학생활동지_3종.docx` },
+  { type: 'PPTX', title: '2차시 수업 PPT', description: '13장 학생 주도 6장면 기획 수업', href: `${rawResourceBase}/lesson-02/01_2차시_수업PPT.pptx` },
+  { type: 'DOCX', title: '학생 활동지 3종', description: '이야기별 A4 한 장 · 사건 배열과 장면 기획', href: `${rawResourceBase}/lesson-02/02_2차시_학생활동지_3종.docx` },
   { type: 'DOCX', title: '교수·학습 과정안', description: '학교 제출용 40분 본시 지도안', href: `${rawResourceBase}/lesson-02/03_2차시_교수학습과정안.docx` },
   { type: 'DOCX', title: '교사용 답안', description: '이야기 3종 정답·발문·지도 유의점', href: `${rawResourceBase}/lesson-02/04_2차시_교사용답안.docx` },
   { type: 'DOCX', title: '고정 이야기 읽기 자료', description: '생성형 AI 없이 사용하는 이야기별 A4 읽기 자료', href: `${rawResourceBase}/lesson-02/05_2차시_고정이야기읽기자료.docx` },
@@ -36,7 +36,11 @@ export default function TeacherPage() {
   const login = (event: React.FormEvent) => {
     event.preventDefault();
     if (password === '3035') {
-      localStorage.setItem(STORAGE_KEYS.teacherAuth, 'true');
+      try {
+        localStorage.setItem(STORAGE_KEYS.teacherAuth, 'true');
+      } catch {
+        // The current session can still open even if device policy blocks storage.
+      }
       setAuthenticated(true);
       setError('');
       return;
@@ -45,13 +49,18 @@ export default function TeacherPage() {
   };
 
   const resetLesson = (lesson: 1 | 2) => {
-    if (lesson === 1) {
-      localStorage.setItem(STORAGE_KEYS.progress, JSON.stringify(initialProgress));
-    } else {
-      localStorage.setItem(STORAGE_KEYS.lessonTwoProgress, JSON.stringify({
-        ...initialLessonTwoProgress,
-        updatedAt: new Date().toISOString(),
-      }));
+    try {
+      if (lesson === 1) {
+        localStorage.setItem(STORAGE_KEYS.progress, JSON.stringify(initialProgress));
+      } else {
+        localStorage.setItem(STORAGE_KEYS.lessonTwoProgress, JSON.stringify({
+          ...initialLessonTwoProgress,
+          updatedAt: new Date().toISOString(),
+        }));
+      }
+    } catch {
+      setSaved('이 기기에서는 활동 기록 저장이 차단되어 있습니다.');
+      return;
     }
     setSaved(`${lesson}차시의 현재 기기 학생 활동 기록을 초기화했습니다.`);
   };
@@ -86,7 +95,14 @@ export default function TeacherPage() {
             <h1>교사 수업실</h1>
             <p>현재 완성된 1·2차시의 수업 실행과 제출 자료를 한곳에서 관리합니다.</p>
           </div>
-          <button onClick={() => { localStorage.removeItem(STORAGE_KEYS.teacherAuth); setAuthenticated(false); }}>로그아웃</button>
+          <button onClick={() => {
+            try {
+              localStorage.removeItem(STORAGE_KEYS.teacherAuth);
+            } catch {
+              // The visible session can still close when storage access is blocked.
+            }
+            setAuthenticated(false);
+          }}>로그아웃</button>
         </section>
 
         {saved && <div className="save-toast" role="status">{saved}</div>}
@@ -96,7 +112,7 @@ export default function TeacherPage() {
           <div className="lesson-two-teacher-copy">
             <span>창체·국어 · 초등 3~4학년</span>
             <h2>우리가 만들 이야기 정하기</h2>
-            <p>교사가 검토한 옛이야기에서 인물·배경을 고르고, 사건 여섯 개를 옮겨 이야기판을 완성합니다.</p>
+            <p>교사가 검토한 옛이야기의 사건 순서를 확인한 뒤, 학생이 여섯 장면의 인물·장소·느낌·그릴 모습을 직접 기획합니다.</p>
             <div>
               <Link to="/present/2" target="_blank">수업용 PPT 열기</Link>
               <Link to="/lesson/2" target="_blank">학생용 웹앱 열기</Link>
@@ -111,14 +127,14 @@ export default function TeacherPage() {
         </section>
 
         <section className="lesson-two-teacher-flow">
-          <header><span>40분 수업 흐름</span><h2>읽기에서 이야기판 완성까지</h2></header>
+          <header><span>40분 수업 흐름</span><h2>읽기에서 학생의 그림책 기획까지</h2></header>
           <ol>
             <li><span>5분</span><strong>도입</strong><p>인물·사건·배경 떠올리기</p></li>
-            <li><span>7분</span><strong>이야기 선택</strong><p>모둠이 만들 옛이야기 고르기</p></li>
-            <li><span>8분</span><strong>인물·배경</strong><p>알맞은 낱말 선택하기</p></li>
-            <li><span>13분</span><strong>사건 순서</strong><p>여섯 사건 카드 옮기기</p></li>
-            <li><span>5분</span><strong>여섯 장면</strong><p>더 알려줄 정보 고르기</p></li>
-            <li><span>2분</span><strong>정리</strong><p>완성 이야기판 확인하기</p></li>
+            <li><span>5분</span><strong>이야기 선택</strong><p>모둠이 만들 옛이야기 고르기</p></li>
+            <li><span>5분</span><strong>인물·배경</strong><p>알맞은 낱말 선택하기</p></li>
+            <li><span>10분</span><strong>사건 순서</strong><p>여섯 사건 카드 옮기기</p></li>
+            <li><span>12분</span><strong>장면 기획</strong><p>인물·장소·느낌·모습 고르기</p></li>
+            <li><span>3분</span><strong>정리</strong><p>내가 기획한 장면 소개하기</p></li>
           </ol>
         </section>
 
