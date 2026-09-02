@@ -36,6 +36,27 @@ export type LessonTwoProgress = {
   updatedAt: string;
 };
 
+export type LessonThreeDataKind = 'text' | 'image' | 'sound';
+
+export type LessonThreeComparisonAnswer = 'different-data' | 'different-device' | 'different-title';
+
+export type LessonThreeProgress = {
+  version: 1;
+  step: number;
+  classificationAnswers: Record<string, LessonThreeDataKind>;
+  classificationComplete: boolean;
+  exploredBundleIds: string[];
+  comparisonAnswer: LessonThreeComparisonAnswer | null;
+  comparisonComplete: boolean;
+  storyId: LessonTwoStoryId | null;
+  sceneId: string;
+  textClueId: string;
+  imageClueId: string;
+  soundClueId: string;
+  completed: boolean;
+  updatedAt: string;
+};
+
 export type Slide = {
   kicker: string;
   title: string;

@@ -1,0 +1,82 @@
+.lesson-three-shell {
+  background: #f1eee6;
+}
+
+.lesson-three-shell,
+.lesson-three-shell * {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
+
+.lesson-three-shell :is(a, button, input, summary):focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #245e78;
+}
+
+.lesson-three-shell .lesson-two-home,
+.lesson-three-shell .teacher-dashboard.lesson-two-teacher-dashboard {
+  --l2-ink: #202a29;
+  --l2-muted: #646b67;
+  --l2-paper: #fffdf8;
+  --l2-cream: #f1eee6;
+  --l2-green: #173f3b;
+  --l2-red: #245e78;
+  --l2-line: #c8c1b3;
+}
+
+.lesson-three-shell .lesson-two-home-current {
+  background: linear-gradient(152deg, #173f3b 0%, #12342f 100%);
+}
+
+.lesson-three-shell .lesson-two-launch-list article.current {
+  background: #f8f5ed;
+}
+
+.lesson-three-shell .lesson-two-launch-list article.current nav a:last-child,
+.lesson-three-shell .lesson-two-teacher-copy a:first-child {
+  border-color: #245e78;
+  background: #245e78;
+}
+
+.lesson-three-shell .lesson-two-teacher-index {
+  background: #173f3b;
+}
+
+.lesson-three-shell .lesson-two-teacher-index strong {
+  color: #c8d7d2;
+}
+
+.lesson-three-shell .lesson-two-teacher-current aside {
+  border-left-color: #245e78;
+  background: #eaf0ef;
+}
+
+.lesson-three-shell .lesson-two-teacher-flow ol {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .lesson-three-shell .lesson-two-teacher-flow ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .lesson-three-shell .lesson-two-home-hero {
+    width: min(100% - 24px, 700px);
+  }
+
+  .lesson-three-shell .lesson-two-home-intro h1 {
+    font-size: 27px;
+  }
+
+  .lesson-three-shell .lesson-two-home-current > strong {
+    font-size: 25px;
+  }
+
+  .lesson-three-shell .lesson-two-teacher-flow ol {
+    grid-template-columns: 1fr;
+  }
+}

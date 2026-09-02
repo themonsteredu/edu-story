@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 type Props = {
   children: ReactNode;
   compact?: boolean;
-  lessonNumber?: 1 | 2;
+  lessonNumber?: 1 | 2 | 3;
 };
 
 export default function AppShell({ children, compact = false, lessonNumber = 2 }: Props) {
@@ -12,6 +12,7 @@ export default function AppShell({ children, compact = false, lessonNumber = 2 }
     'app-shell',
     compact ? 'compact-shell' : '',
     lessonNumber === 2 ? 'lesson-two-shell' : '',
+    lessonNumber === 3 ? 'lesson-three-shell' : '',
   ].filter(Boolean).join(' ');
 
   return (
