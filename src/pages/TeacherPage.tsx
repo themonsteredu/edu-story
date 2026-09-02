@@ -2,22 +2,23 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AppShell from '../components/AppShell';
 import { initialLessonTwoProgress, initialProgress, isTeacherAuthenticated, STORAGE_KEYS } from '../utils/storage';
-import lessonOnePlanUrl from '../assets/teacher/03_1차시_교수학습과정안.docx?url';
-import lessonOneAnswerUrl from '../assets/teacher/04_1차시_교사용답안.docx?url';
+
+const rawResourceBase = 'https://raw.githubusercontent.com/themonsteredu/edu-story/main/public/resources';
+const rawTeacherAssetBase = 'https://raw.githubusercontent.com/themonsteredu/edu-story/main/src/assets/teacher';
 
 const lessonTwoDownloads = [
-  { type: 'PPTX', title: '2차시 수업 PPT', description: '13장 이야기 구성 수업 프레젠테이션', href: '/resources/lesson-02/01_2차시_수업PPT.pptx' },
-  { type: 'DOCX', title: '학생 활동지 3종', description: '이야기별 A4 한 장 · 선택·순서형', href: '/resources/lesson-02/02_2차시_학생활동지_3종.docx' },
-  { type: 'DOCX', title: '교수·학습 과정안', description: '학교 제출용 40분 본시 지도안', href: '/resources/lesson-02/03_2차시_교수학습과정안.docx' },
-  { type: 'DOCX', title: '교사용 답안', description: '이야기 3종 정답·발문·지도 유의점', href: '/resources/lesson-02/04_2차시_교사용답안.docx' },
-  { type: 'DOCX', title: '고정 이야기 읽기 자료', description: '생성형 AI 없이 사용하는 이야기별 A4 읽기 자료', href: '/resources/lesson-02/05_2차시_고정이야기읽기자료.docx' },
+  { type: 'PPTX', title: '2차시 수업 PPT', description: '13장 이야기 구성 수업 프레젠테이션', href: `${rawResourceBase}/lesson-02/01_2차시_수업PPT.pptx` },
+  { type: 'DOCX', title: '학생 활동지 3종', description: '이야기별 A4 한 장 · 선택·순서형', href: `${rawResourceBase}/lesson-02/02_2차시_학생활동지_3종.docx` },
+  { type: 'DOCX', title: '교수·학습 과정안', description: '학교 제출용 40분 본시 지도안', href: `${rawResourceBase}/lesson-02/03_2차시_교수학습과정안.docx` },
+  { type: 'DOCX', title: '교사용 답안', description: '이야기 3종 정답·발문·지도 유의점', href: `${rawResourceBase}/lesson-02/04_2차시_교사용답안.docx` },
+  { type: 'DOCX', title: '고정 이야기 읽기 자료', description: '생성형 AI 없이 사용하는 이야기별 A4 읽기 자료', href: `${rawResourceBase}/lesson-02/05_2차시_고정이야기읽기자료.docx` },
 ];
 
 const lessonOneDownloads = [
-  { type: 'PPTX', title: '1차시 수업 PPT', description: '15장 관찰·분류 수업 프레젠테이션', href: '/resources/lesson-01/01_1차시_수업PPT.pptx' },
-  { type: 'DOCX', title: '1차시 학생 활동지', description: 'A4 한 장 ○표·선택형 활동지', href: '/resources/lesson-01/02_1차시_학생활동지.docx' },
-  { type: 'DOCX', title: '1차시 교수·학습 과정안', description: '학교 제출용 본시 지도안', href: lessonOnePlanUrl },
-  { type: 'DOCX', title: '1차시 교사용 답안', description: '분류 답안·발문·지도 유의점', href: lessonOneAnswerUrl },
+  { type: 'PPTX', title: '1차시 수업 PPT', description: '15장 관찰·분류 수업 프레젠테이션', href: `${rawResourceBase}/lesson-01/01_1차시_수업PPT.pptx` },
+  { type: 'DOCX', title: '1차시 학생 활동지', description: 'A4 한 장 ○표·선택형 활동지', href: `${rawResourceBase}/lesson-01/02_1차시_학생활동지.docx` },
+  { type: 'DOCX', title: '1차시 교수·학습 과정안', description: '학교 제출용 본시 지도안', href: `${rawTeacherAssetBase}/03_1차시_교수학습과정안.docx` },
+  { type: 'DOCX', title: '1차시 교사용 답안', description: '분류 답안·발문·지도 유의점', href: `${rawTeacherAssetBase}/04_1차시_교사용답안.docx` },
 ];
 
 export default function TeacherPage() {
