@@ -15,10 +15,15 @@ export type LessonOneProgress = {
 
 export type LessonTwoStoryId = 'sun-moon' | 'heungbu-nolbu' | 'good-brothers';
 
-export type LessonTwoDetailCategory = '표정' | '시간' | '주변 모습' | '중요한 물건' | '소리';
+export type LessonTwoScenePlan = {
+  characters: string;
+  place: string;
+  mood: string;
+  detail: string;
+};
 
 export type LessonTwoProgress = {
-  version: 1;
+  version: 2;
   step: number;
   storyId: LessonTwoStoryId | null;
   selectedCharacterIds: string[];
@@ -26,7 +31,7 @@ export type LessonTwoProgress = {
   eventOrder: string[];
   orderAttempts: number;
   orderConfirmed: boolean;
-  detailByEventId: Record<string, LessonTwoDetailCategory>;
+  scenePlanByEventId: Record<string, LessonTwoScenePlan>;
   completed: boolean;
   updatedAt: string;
 };

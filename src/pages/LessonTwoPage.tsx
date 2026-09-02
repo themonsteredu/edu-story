@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 import AppShell from '../components/AppShell';
 import {
   getLessonTwoStory,
-  lessonTwoDetailCategories,
   lessonTwoStories,
   shuffledEventIds,
 } from '../data/lesson2';
 import type { LessonTwoChoice, LessonTwoEvent } from '../data/lesson2';
 import type {
-  LessonTwoDetailCategory,
   LessonTwoProgress,
+  LessonTwoScenePlan,
   LessonTwoStoryId,
 } from '../types';
 import {
@@ -39,7 +38,10 @@ export default function LessonTwoPage() {
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [dragTargetId, setDragTargetId] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState('');
+  const [activeSceneIndex, setActiveSceneIndex] = useState(0);
+  const [activeFinalSceneIndex, setActiveFinalSceneIndex] = useState(0);
   const stageRef = useRef<HTMLElement>(null);
+  const scenePlannerRef = useRef<HTMLElement>(null);
 
   const story = useMemo(() => getLessonTwoStory(progress.storyId), [progress.storyId]);
   const orderedEvents = useMemo(
@@ -66,8 +68,32 @@ export default function LessonTwoPage() {
   const eventOrderCorrect = correctEventIds.length === 6
     && correctEventIds.every((id, index) => progress.eventOrder[index] === id);
   const scenesReady = story
-    ? story.events.every((event) => Boolean(progress.detailByEventId[event.id]))
+    ? story.events.every((event) => {
+      const plan = progress.scenePlanByEventId[event.id];
+      return Boolean(plan?.characters && plan.place && plan.mood && plan.detail);
+    })
     : false;
+  const completedSceneCount = story
+    ? story.events.filter((event) => {
+      const plan = progress.scenePlanByEventId[event.id];
+      return Boolean(plan?.characters && plan.place && plan.mood && plan.detail);
+    }).length
+    : 0;
+  const activeScene = orderedEvents[activeSceneIndex] ?? null;
+  const activeScenePlan = activeScene
+    ? progress.scenePlanByEventId[activeScene.id]
+    : undefined;
+  const activeSceneReady = Boolean(
+    activeScenePlan?.characters
+    && activeScenePlan.place
+    && activeScenePlan.mood
+    && activeScenePlan.detail,
+  );
+
+  const scrollToTop = () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
 
   useEffect(() => {
     writeLessonTwoProgress(progress);
@@ -93,9 +119,11 @@ export default function LessonTwoPage() {
   };
 
   const setStep = (step: number) => {
+    if (step === 3) setActiveSceneIndex(0);
+    if (step === 4) setActiveFinalSceneIndex(0);
     update({ step });
     setAnnouncement(`${stepLabels[step]} 단계입니다.`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
     window.requestAnimationFrame(() => {
       const heading = stageRef.current?.querySelector<HTMLElement>('#lesson-two-stage-title');
       heading?.setAttribute('tabindex', '-1');
@@ -104,6 +132,7 @@ export default function LessonTwoPage() {
   };
 
   const selectStory = (storyId: LessonTwoStoryId) => {
+    if (progress.storyId === storyId) return;
     const nextStory = getLessonTwoStory(storyId);
     if (!nextStory) return;
     setElementsChecked(false);
@@ -210,10 +239,36 @@ export default function LessonTwoPage() {
     );
   };
 
-  const chooseDetail = (eventId: string, detail: LessonTwoDetailCategory) => {
+  const chooseSceneOption = (
+    eventId: string,
+    field: keyof LessonTwoScenePlan,
+    value: string,
+  ) => {
+    const currentPlan = progress.scenePlanByEventId[eventId] || {
+      characters: '',
+      place: '',
+      mood: '',
+      detail: '',
+    };
     update({
-      detailByEventId: { ...progress.detailByEventId, [eventId]: detail },
+      scenePlanByEventId: {
+        ...progress.scenePlanByEventId,
+        [eventId]: { ...currentPlan, [field]: value },
+      },
     });
+  };
+
+  const goToScene = (index: number) => {
+    const nextIndex = Math.max(0, Math.min(orderedEvents.length - 1, index));
+    setActiveSceneIndex(nextIndex);
+    setAnnouncement(`장면 ${nextIndex + 1} 기획입니다.`);
+    window.setTimeout(() => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      scenePlannerRef.current?.scrollIntoView({
+        block: 'start',
+        behavior: reduceMotion ? 'auto' : 'smooth',
+      });
+    }, 0);
   };
 
   const reset = () => {
@@ -221,7 +276,7 @@ export default function LessonTwoPage() {
     setElementsChecked(false);
     setOrderChecked(false);
     setAnnouncement('2차시 활동을 처음으로 되돌렸어요.');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
   };
 
   return (
@@ -445,18 +500,18 @@ export default function LessonTwoPage() {
                           <button
                             type="button"
                             disabled={index === 0}
-                            aria-label={`${item.text} 카드를 앞으로 이동`}
+                            aria-label={`${item.text} 카드를 한 칸 앞으로 이동`}
                             onClick={() => moveEvent(item.id, -1)}
                           >
-                            앞
+                            한 칸 앞
                           </button>
                           <button
                             type="button"
                             disabled={index === orderedEvents.length - 1}
-                            aria-label={`${item.text} 카드를 뒤로 이동`}
+                            aria-label={`${item.text} 카드를 한 칸 뒤로 이동`}
                             onClick={() => moveEvent(item.id, 1)}
                           >
-                            뒤
+                            한 칸 뒤
                           </button>
                         </div>
                         {orderChecked && (
@@ -487,49 +542,97 @@ export default function LessonTwoPage() {
               </>
             )}
 
-            {progress.step === 3 && story && (
+            {progress.step === 3 && story && activeScene && (
               <>
                 <div className="lesson-two-heading">
-                  <span>활동 4 · 여섯 장면</span>
-                  <h2 id="lesson-two-stage-title">각 장면에서 무엇을 더 알려주면 좋을까요?</h2>
-                  <p>AI에게도 누가·어디서·무엇을 하는지 자세히 알려줘야 해요. 여기에서는 AI를 실행하지 않고, 장면에 더 필요한 정보만 골라요.</p>
+                  <span>활동 4 · 우리 그림책 기획</span>
+                  <h2 id="lesson-two-stage-title">장면을 하나씩 그림책처럼 계획해 보세요.</h2>
+                  <p>정답은 없어요. 우리 모둠이 그리고 싶은 모습을 고르면 돼요.</p>
                 </div>
-                <div className="lesson-two-scene-board">
+
+                <nav className="lesson-two-scene-tabs no-print" aria-label="기획할 장면 선택">
                   {orderedEvents.map((item, index) => {
-                    const selectedDetail = progress.detailByEventId[item.id];
+                    const plan = progress.scenePlanByEventId[item.id];
+                    const complete = Boolean(plan?.characters && plan.place && plan.mood && plan.detail);
                     return (
-                      <article className="lesson-two-scene" key={item.id}>
-                        <header>
-                          <span>{String(index + 1).padStart(2, '0')}</span>
-                          <strong>장면 {index + 1}</strong>
-                        </header>
-                        <p>{item.text}</p>
-                        <dl>
-                          <div><dt>누가</dt><dd>{item.people}</dd></div>
-                          <div><dt>어디서</dt><dd>{item.place}</dd></div>
-                        </dl>
-                        <fieldset>
-                          <legend>더 알려줄 정보</legend>
-                          <div>
-                            {lessonTwoDetailCategories.map((detail) => (
-                              <button
-                                type="button"
-                                key={detail}
-                                className={selectedDetail === detail ? 'is-selected' : ''}
-                                aria-pressed={selectedDetail === detail}
-                                onClick={() => chooseDetail(item.id, detail)}
-                              >
-                                {detail}
-                              </button>
-                            ))}
-                          </div>
-                        </fieldset>
-                      </article>
+                      <button
+                        type="button"
+                        key={item.id}
+                        className={`${activeSceneIndex === index ? 'is-active' : ''} ${complete ? 'is-complete' : ''}`}
+                        aria-current={activeSceneIndex === index ? 'step' : undefined}
+                        aria-label={`장면 ${index + 1}${complete ? ', 기획 완료' : ''}`}
+                        onClick={() => goToScene(index)}
+                      >
+                        {index + 1}
+                      </button>
                     );
                   })}
-                </div>
+                  <span>{completedSceneCount} / 6 장면 완성</span>
+                </nav>
+
+                <article ref={scenePlannerRef} className="lesson-two-scene-planner" aria-labelledby={`scene-${activeScene.id}-title`}>
+                  <header>
+                    <span>{String(activeSceneIndex + 1).padStart(2, '0')} / 06</span>
+                    <div>
+                      <small>이 장면의 사건</small>
+                      <h3 id={`scene-${activeScene.id}-title`}>{activeScene.text}</h3>
+                    </div>
+                  </header>
+
+                  <div className="lesson-two-planning-groups">
+                    {([
+                      { field: 'characters' as const, label: '누가 보이나요?', options: activeScene.planning.characters },
+                      { field: 'place' as const, label: '어디에서 일어나요?', options: activeScene.planning.places },
+                      { field: 'mood' as const, label: '어떤 느낌으로 그릴까요?', options: activeScene.planning.moods },
+                      { field: 'detail' as const, label: '무엇을 크게 보여 줄까요?', options: activeScene.planning.details },
+                    ]).map((group, groupIndex) => (
+                      <fieldset key={group.field}>
+                        <legend><span>{groupIndex + 1}</span>{group.label}</legend>
+                        <div>
+                          {group.options.map((option) => {
+                            const selected = activeScenePlan?.[group.field] === option;
+                            return (
+                              <button
+                                type="button"
+                                key={option}
+                                className={selected ? 'is-selected' : ''}
+                                aria-pressed={selected}
+                                onClick={() => chooseSceneOption(activeScene.id, group.field, option)}
+                              >
+                                {option}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </fieldset>
+                    ))}
+                  </div>
+
+                  <footer className="lesson-two-scene-navigation no-print">
+                    <button
+                      type="button"
+                      disabled={activeSceneIndex === 0}
+                      onClick={() => goToScene(activeSceneIndex - 1)}
+                    >
+                      이전 장면
+                    </button>
+                    {activeSceneIndex < orderedEvents.length - 1 ? (
+                      <button
+                        type="button"
+                        className="is-primary"
+                        disabled={!activeSceneReady}
+                        onClick={() => goToScene(activeSceneIndex + 1)}
+                      >
+                        다음 장면
+                      </button>
+                    ) : (
+                      <span>{activeSceneReady ? '여섯 장면을 다 확인했어요.' : '네 가지를 모두 골라 보세요.'}</span>
+                    )}
+                  </footer>
+                </article>
+
                 <div className="lesson-two-actions no-print">
-                  <button type="button" className="lesson-two-button is-quiet" onClick={() => setStep(2)}>이전</button>
+                  <button type="button" className="lesson-two-button is-quiet" onClick={() => setStep(2)}>사건 순서로</button>
                   <button
                     type="button"
                     className="lesson-two-button is-primary"
@@ -539,7 +642,7 @@ export default function LessonTwoPage() {
                       setStep(4);
                     }}
                   >
-                    우리 모둠 이야기판 완성
+                    우리 그림책 기획판 보기
                   </button>
                 </div>
               </>
@@ -549,30 +652,53 @@ export default function LessonTwoPage() {
               <>
                 <div className="lesson-two-completion-heading">
                   <span>2차시 완료</span>
-                  <strong>02</strong>
-                  <h2 id="lesson-two-stage-title">{story.title} 이야기판을 완성했어요.</h2>
-                  <p>인물, 장소, 사건에 자세한 정보를 더하면 장면을 분명하게 전할 수 있어요.</p>
+                  <strong aria-hidden="true">02</strong>
+                  <h2 id="lesson-two-stage-title">{story.title} 그림책 기획판을 완성했어요.</h2>
+                  <p>우리 모둠이 고른 인물, 장소, 느낌, 그릴 모습이 여섯 장면에 담겼어요.</p>
                 </div>
-                <div className="lesson-two-final-board">
+
+                <nav className="lesson-two-final-tabs no-print" aria-label="완성한 장면 보기">
                   {orderedEvents.map((item, index) => (
-                    <article key={item.id}>
-                      <span>{String(index + 1).padStart(2, '0')}</span>
-                      <p>{item.text}</p>
-                      <dl>
-                        <div><dt>누가</dt><dd>{item.people}</dd></div>
-                        <div><dt>어디서</dt><dd>{item.place}</dd></div>
-                        <div><dt>더 자세히</dt><dd>{progress.detailByEventId[item.id]}</dd></div>
-                      </dl>
-                    </article>
+                    <button
+                      type="button"
+                      key={item.id}
+                      className={activeFinalSceneIndex === index ? 'is-active' : ''}
+                      aria-current={activeFinalSceneIndex === index ? 'step' : undefined}
+                      onClick={() => setActiveFinalSceneIndex(index)}
+                    >
+                      장면 {index + 1}
+                    </button>
                   ))}
-                </div>
+                </nav>
+
+                <ol className="lesson-two-final-board">
+                  {orderedEvents.map((item, index) => {
+                    const plan = progress.scenePlanByEventId[item.id];
+                    return (
+                      <li
+                        key={item.id}
+                        className={activeFinalSceneIndex === index ? 'is-active' : ''}
+                        aria-labelledby={`final-scene-${item.id}`}
+                      >
+                        <span>{String(index + 1).padStart(2, '0')}</span>
+                        <p id={`final-scene-${item.id}`}>{item.text}</p>
+                        <dl>
+                          <div><dt>누가</dt><dd>{plan?.characters}</dd></div>
+                          <div><dt>어디</dt><dd>{plan?.place}</dd></div>
+                          <div><dt>느낌</dt><dd>{plan?.mood}</dd></div>
+                          <div><dt>그릴 모습</dt><dd>{plan?.detail}</dd></div>
+                        </dl>
+                      </li>
+                    );
+                  })}
+                </ol>
                 <blockquote className="lesson-two-concept">
                   <strong>오늘의 발견</strong>
-                  <p>AI에게도 누가·어디서·무엇을 하는지 자세히 알려줘야 장면을 분명하게 전할 수 있어요.</p>
-                  <small>이번 수업에서는 AI나 외부 도구를 실행하지 않고, 장면을 설명하는 정보만 정리했어요.</small>
+                  <p>같은 이야기도 누가·어디서·어떤 모습인지 다르게 고르면 우리만의 그림책이 돼요.</p>
+                  <small>오늘 만든 기획판은 다음 수업에서 그림책 장면을 만들 때 사용해요.</small>
                 </blockquote>
                 <div className="lesson-two-actions lesson-two-completion-actions no-print">
-                  <button type="button" className="lesson-two-button is-quiet" onClick={() => window.print()}>이야기판 인쇄하기</button>
+                  <button type="button" className="lesson-two-button is-quiet" onClick={() => window.print()}>기획판 인쇄하기</button>
                   <Link className="lesson-two-button is-primary" to="/">차시 목록으로</Link>
                   <button type="button" className="lesson-two-reset" onClick={reset}>처음부터 다시 하기</button>
                 </div>

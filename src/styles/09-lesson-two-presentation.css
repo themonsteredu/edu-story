@@ -100,7 +100,7 @@
 
 .lesson-two-slide-copy h1 {
   margin: 22px 0 24px;
-  font-size: clamp(37px, 4.25vw, 66px);
+  font-size: clamp(34px, 3.8vw, 56px);
   line-height: 1.24;
   letter-spacing: -0.045em;
   word-break: keep-all;
@@ -444,22 +444,39 @@
   word-break: keep-all;
 }
 
+.lesson-two-slide-scenes small {
+  margin-top: 12px;
+  color: var(--l2-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .lesson-two-slide-details {
   border-top: 2px solid var(--l2-ink);
+}
+
+.lesson-two-slide-details > small {
+  display: block;
+  padding: 14px 4px 18px;
+  color: var(--l2-red);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .lesson-two-slide-details section {
   min-height: 70px;
   padding: 12px 4px;
   display: grid;
-  grid-template-columns: 58px 1fr;
+  grid-template-columns: 132px 1fr;
+  gap: 16px;
   align-items: center;
   border-bottom: 1px solid var(--l2-line);
 }
 
 .lesson-two-slide-details section span {
   color: var(--l2-red);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -590,7 +607,13 @@
   }
 
   .lesson-two-slide-copy h1 {
-    font-size: 34px;
+    font-size: 28px;
+    line-height: 1.32;
+  }
+
+  .lesson-two-slide-copy p {
+    font-size: 16px;
+    line-height: 1.65;
   }
 
   .lesson-two-slide-visual {
@@ -639,6 +662,15 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .lesson-two-slide-details section {
+    grid-template-columns: 108px 1fr;
+    gap: 10px;
+  }
+
+  .lesson-two-slide-details section strong {
+    font-size: 18px;
+  }
+
   .lesson-two-presentation-controls {
     right: 14px;
     bottom: calc(14px + env(safe-area-inset-bottom));
@@ -661,7 +693,7 @@
 
   .lesson-two-slide-summary > strong {
     margin: 32px 0 18px;
-    font-size: 31px;
+    font-size: 28px;
   }
 }
 

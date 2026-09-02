@@ -1,4 +1,4 @@
-import type { LessonOneProgress, LessonTwoProgress } from '../types';
+import type { LessonOneProgress, LessonTwoProgress, LessonTwoScenePlan } from '../types';
 
 export const STORAGE_KEYS = {
   progress: 'eduStory:lesson1:progress',
@@ -20,7 +20,7 @@ export const initialProgress: LessonOneProgress = {
 };
 
 export const initialLessonTwoProgress: LessonTwoProgress = {
-  version: 1,
+  version: 2,
   step: 0,
   storyId: null,
   selectedCharacterIds: [],
@@ -28,7 +28,7 @@ export const initialLessonTwoProgress: LessonTwoProgress = {
   eventOrder: [],
   orderAttempts: 0,
   orderConfirmed: false,
-  detailByEventId: {},
+  scenePlanByEventId: {},
   completed: false,
   updatedAt: new Date(0).toISOString(),
 };
@@ -49,32 +49,66 @@ export function readProgress(): LessonOneProgress {
 }
 
 export function writeProgress(progress: LessonOneProgress) {
-  localStorage.setItem(
-    STORAGE_KEYS.progress,
-    JSON.stringify({ ...progress, updatedAt: new Date().toISOString() }),
-  );
+  try {
+    localStorage.setItem(
+      STORAGE_KEYS.progress,
+      JSON.stringify({ ...progress, updatedAt: new Date().toISOString() }),
+    );
+  } catch {
+    // The lesson stays usable when private browsing or device policy blocks storage.
+  }
 }
 
 export function readLessonTwoProgress(): LessonTwoProgress {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.lessonTwoProgress);
     if (!raw) return initialLessonTwoProgress;
-    const parsed = JSON.parse(raw) as Partial<LessonTwoProgress>;
+    const parsed = JSON.parse(raw) as Partial<LessonTwoProgress> & {
+      version?: number;
+      detailByEventId?: Record<string, unknown>;
+    };
     const storyIds = ['sun-moon', 'heungbu-nolbu', 'good-brothers'];
     const storyId = parsed.storyId && storyIds.includes(parsed.storyId) ? parsed.storyId : null;
-    const step = storyId && Number.isInteger(parsed.step) && Number(parsed.step) >= 0 && Number(parsed.step) <= 4
+    const storedStep = storyId && Number.isInteger(parsed.step) && Number(parsed.step) >= 0 && Number(parsed.step) <= 4
       ? Number(parsed.step)
       : 0;
+    const isCurrentVersion = parsed.version === 2;
+    const storedPlans = isCurrentVersion && parsed.scenePlanByEventId && typeof parsed.scenePlanByEventId === 'object'
+      ? parsed.scenePlanByEventId
+      : {};
+    const scenePlanByEventId = Object.fromEntries(
+      Object.entries(storedPlans).filter((entry): entry is [string, LessonTwoScenePlan] => {
+        const plan = entry[1] as Partial<LessonTwoScenePlan> | null;
+        return Boolean(
+          plan
+          && typeof plan.characters === 'string'
+          && typeof plan.place === 'string'
+          && typeof plan.mood === 'string'
+          && typeof plan.detail === 'string',
+        );
+      }),
+    );
+    const completePlanCount = Object.values(scenePlanByEventId).filter(
+      (plan) => plan.characters && plan.place && plan.mood && plan.detail,
+    ).length;
+    const hasSixCompletePlans = completePlanCount >= 6;
+    const step = isCurrentVersion
+      ? (storedStep === 4 && !hasSixCompletePlans ? 3 : storedStep)
+      : Math.min(storedStep, 3);
     return {
-      ...initialLessonTwoProgress,
-      ...parsed,
-      version: 1,
+      version: 2,
       step,
       storyId,
       selectedCharacterIds: Array.isArray(parsed.selectedCharacterIds) ? parsed.selectedCharacterIds : [],
       selectedBackgroundIds: Array.isArray(parsed.selectedBackgroundIds) ? parsed.selectedBackgroundIds : [],
       eventOrder: Array.isArray(parsed.eventOrder) ? parsed.eventOrder : [],
-      detailByEventId: parsed.detailByEventId || {},
+      orderAttempts: Number.isInteger(parsed.orderAttempts) && Number(parsed.orderAttempts) >= 0
+        ? Number(parsed.orderAttempts)
+        : 0,
+      orderConfirmed: Boolean(parsed.orderConfirmed),
+      scenePlanByEventId,
+      completed: isCurrentVersion && hasSixCompletePlans ? Boolean(parsed.completed) : false,
+      updatedAt: typeof parsed.updatedAt === 'string' ? parsed.updatedAt : initialLessonTwoProgress.updatedAt,
     };
   } catch {
     return initialLessonTwoProgress;
@@ -82,12 +116,20 @@ export function readLessonTwoProgress(): LessonTwoProgress {
 }
 
 export function writeLessonTwoProgress(progress: LessonTwoProgress) {
-  localStorage.setItem(
-    STORAGE_KEYS.lessonTwoProgress,
-    JSON.stringify(progress),
-  );
+  try {
+    localStorage.setItem(
+      STORAGE_KEYS.lessonTwoProgress,
+      JSON.stringify(progress),
+    );
+  } catch {
+    // The lesson stays usable when private browsing or device policy blocks storage.
+  }
 }
 
 export function isTeacherAuthenticated() {
-  return localStorage.getItem(STORAGE_KEYS.teacherAuth) === 'true';
+  try {
+    return localStorage.getItem(STORAGE_KEYS.teacherAuth) === 'true';
+  } catch {
+    return false;
+  }
 }

@@ -33,15 +33,6 @@ const SERIES = 'AI와 함께 만드는 우리 옛이야기 그림책 · 2차시 
 const CURRICULUM_SOURCE = 'User-provided curriculum: AI융합_옛이야기그림책_10차시_지도안_1.docx';
 const ADAPTATION_SOURCE = 'Fixed classroom adaptation of traditional Korean folktales (public-domain source tradition), as authored in src/data/lesson2.ts';
 
-const storyEvents = [
-  '어머니가 장에 떡을 팔러 떠나요',
-  '산길에서 호랑이가 어머니를 만나요.',
-  '호랑이가 오누이의 집으로 찾아와요.',
-  '오누이가 호랑이를 피해 큰 나무로 올라가요.',
-  '오누이가 하늘을 향해 도와 달라고 빌어요.',
-  '오누이는 해와 달이 되어 하늘을 밝혀요.',
-];
-
 const shortEvents = [
   '어머니가 장에 떡을 팔러 떠나요',
   '산길에서 호랑이를 만나요',
@@ -54,44 +45,44 @@ const shortEvents = [
 const slides = [
   {
     kicker: '2차시 · LOOK',
-    title: '우리가 만들 이야기 정하기',
-    subtitle: '옛이야기의 인물·사건·배경을 찾고 여섯 장면으로 나눕니다.',
+    title: '우리 옛이야기 기획하기',
+    subtitle: '이야기를 읽고, 사건 순서를 맞춘 뒤, 여섯 장면을 우리 생각으로 만듭니다.',
     visual: 'cover',
   },
   {
-    kicker: '오늘의 질문',
-    title: '옛이야기는 무엇으로 이루어질까요?',
-    subtitle: '이야기를 자세히 살펴보면 꼭 필요한 세 가지를 찾을 수 있습니다.',
+    kicker: '오늘의 약속',
+    title: '사건 순서는 맞히고, 장면은 내가 정해요.',
+    subtitle: '순서에는 정답이 있지만, 느낌과 모습에는 여러 답이 있어요.',
     visual: 'question',
   },
   {
-    kicker: '이야기의 세 요소',
-    title: '누가, 어디에서, 어떤 일을 겪는지 찾아봅니다.',
-    prompt: '인물 · 배경 · 사건',
+    kicker: '오늘의 활동',
+    title: '세 단계로 그림책을 기획합니다.',
+    prompt: '읽기  →  사건 순서  →  장면 기획',
     visual: 'elements',
   },
   {
     kicker: '활동 1 · 이야기 선택',
-    title: '우리 모둠이 만들 옛이야기를 하나 고릅니다.',
-    subtitle: '이야기를 고른 뒤, 교사가 검토해 고정한 읽기 자료를 함께 읽어요.',
+    title: '이야기 하나를 골라 끝까지 읽어요.',
+    subtitle: '교사가 준비한 고정 읽기 자료만 사용합니다.',
     visual: 'stories',
   },
   {
-    kicker: '활동 2 · 인물 찾기',
-    title: '이야기에 누가 나오는지 골라봅니다.',
-    subtitle: '주인공뿐 아니라 사건을 함께 만드는 인물도 찾습니다.',
+    kicker: '활동 1 · 읽으며 찾기',
+    title: '첫째, 누가 나오는지 표시해요.',
+    subtitle: '이야기에 실제로 나온 사람과 동물만 골라요.',
     visual: 'characters',
   },
   {
-    kicker: '활동 2 · 배경 찾기',
-    title: '이야기가 펼쳐지는 곳을 골라봅니다.',
-    subtitle: '장소가 달라지면 일어나는 일과 분위기도 달라집니다.',
+    kicker: '활동 1 · 읽으며 찾기',
+    title: '둘째, 일이 일어난 곳을 찾아요.',
+    subtitle: '장소가 바뀔 때 잠깐 멈추고 표시해요.',
     visual: 'backgrounds',
   },
   {
-    kicker: '활동 3 · 사건 찾기',
-    title: '사건은 이야기에서 실제로 일어난 일입니다.',
-    subtitle: '중요한 사건 여섯 개를 찾으면 그림책의 뼈대가 생깁니다.',
+    kicker: '활동 1 · 읽으며 찾기',
+    title: '셋째, 중요한 일을 여섯 개 찾아요.',
+    subtitle: '없으면 다음 이야기가 이어지지 않는 일을 고릅니다.',
     visual: 'events',
   },
   {
@@ -101,33 +92,33 @@ const slides = [
     visual: 'flow',
   },
   {
-    kicker: '사건 순서 맞추기',
-    title: '섞인 사건 카드를 이야기 순서대로 옮겨봅니다.',
-    subtitle: '글을 많이 쓰지 않고 카드의 자리를 바꾸어 완성합니다.',
+    kicker: '활동 2 · 사건 순서',
+    title: '이 단계만 이야기 순서를 확인해요.',
+    subtitle: '카드에는 답이 있습니다. 이야기 흐름대로 옮겨요.',
     visual: 'shuffle',
   },
   {
     kicker: '학생 활동',
-    title: '웹앱에서 우리 모둠의 사건 순서를 완성하세요.',
-    subtitle: '태블릿에서는 끌어서 옮기고, 휴대폰에서는 앞·뒤 버튼으로 움직입니다.',
+    title: '순서를 맞춘 뒤, 장면 기획으로 넘어가요.',
+    subtitle: '휴대폰에서는 앞·뒤 버튼을 쓰고, 장면에서는 선택지를 눌러요.',
     visual: 'webapp',
   },
   {
-    kicker: '활동 4 · 여섯 장면',
-    title: '여섯 사건이 여섯 장면의 제목이 됩니다.',
-    subtitle: '한 장면에 한 가지 중요한 일이 보이도록 나눕니다.',
+    kicker: '활동 3 · 장면 기획',
+    title: '한 장면마다 네 가지를 내가 정해요.',
+    subtitle: '긴 글을 쓰지 않고 알맞은 말을 골라요.',
     visual: 'six-scenes',
   },
   {
-    kicker: '더 자세히 알려주기',
-    title: '처음 보는 친구가 이해하려면 무엇을 더 알려줘야 할까요?',
-    subtitle: '표정, 시간, 주변 모습, 중요한 물건, 소리 중에서 각 장면마다 하나씩 골라 말해 봅니다.',
+    kicker: '장면 기획 연습',
+    title: '고른 말은 장면이 보이도록 구체적으로 말해요.',
+    subtitle: '같은 사건도 친구마다 다르게 기획할 수 있어요.',
     visual: 'details',
   },
   {
     kicker: '오늘의 정리',
-    title: '인물·배경·사건을 찾으면 이야기의 뼈대를 만들 수 있습니다.',
-    subtitle: '우리 모둠의 옛이야기를 여섯 장면으로 완성했습니다.',
+    title: '순서는 확인하고, 장면은 우리 생각으로 완성해요.',
+    subtitle: '학생이 고른 네 가지가 모여 우리 모둠의 그림책 기획판이 됩니다.',
     visual: 'summary',
   },
 ];
@@ -195,9 +186,9 @@ function addRule(slide, left, top, width, color = C.line, weight = 1) {
 
 function titleSize(value) {
   const length = [...value].length;
-  if (length <= 20) return 52;
-  if (length <= 25) return 46;
-  if (length <= 30) return 41;
+  if (length <= 20) return 46;
+  if (length <= 25) return 42;
+  if (length <= 30) return 38;
   return 35;
 }
 
@@ -337,7 +328,7 @@ function addPaperStrip(slide, options) {
   });
   addRule(slide, 72, 120, 72, C.cinnabar, 6);
   addText(slide, item.title, { left: 72, top: 176, width: 750, height: 92 }, {
-    fontSize: 64,
+    fontSize: 58,
     bold: true,
     color: C.ink,
     vertical: 'middle',
@@ -359,10 +350,10 @@ function addPaperStrip(slide, options) {
     align: 'right',
     vertical: 'middle',
   });
-  const coverWords = ['인물', '배경', '사건', '여섯 장면'];
+  const coverWords = ['이야기 읽기', '사건 순서', '장면 선택', '여섯 장면'];
   coverWords.forEach((word, index) => {
     addText(slide, word, { left: 926, top: 286 + index * 72, width: 230, height: 48 }, {
-      fontSize: index === 3 ? 26 : 30,
+      fontSize: 26,
       bold: true,
       color: C.white,
       vertical: 'middle',
@@ -383,27 +374,42 @@ function addPaperStrip(slide, options) {
   });
   addHeading(slide, item, {
     top: 106,
-    fontSize: 54,
+    fontSize: 44,
     color: C.white,
     subtitleTop: 192,
     subtitleColor: '#D1D7D2',
   });
-  addText(slide, '?', { left: 80, top: 302, width: 220, height: 258 }, {
-    fontSize: 220,
-    color: C.cinnabar,
+  addText(slide, '사건 순서', { left: 88, top: 316, width: 440, height: 58 }, {
+    fontSize: 38,
+    bold: true,
+    color: '#D58A7E',
     vertical: 'middle',
   });
-  addRule(slide, 346, 330, 0, '#53615A', 2);
-  addText(slide, '이야기 속에서 반복해서 찾아야 할 것은 무엇일까요?', { left: 396, top: 348, width: 720, height: 122 }, {
-    fontSize: 37,
+  addRule(slide, 88, 398, 440, '#53615A', 1);
+  addText(slide, '이야기대로 맞혀요.', { left: 88, top: 430, width: 440, height: 54 }, {
+    fontSize: 28,
     bold: true,
     color: C.white,
-    lineSpacing: 1.38,
+  });
+  addRule(slide, 628, 302, 0, '#53615A', 2);
+  addText(slide, '장면 기획', { left: 704, top: 316, width: 440, height: 58 }, {
+    fontSize: 38,
+    bold: true,
+    color: '#D58A7E',
     vertical: 'middle',
   });
-  addText(slide, '손을 들고 한 가지를 먼저 말해 봅시다.', { left: 398, top: 506, width: 670, height: 38 }, {
+  addRule(slide, 704, 398, 440, C.cinnabar, 4);
+  addText(slide, '누가·어디·느낌·모습은\n내가 골라요.', { left: 704, top: 424, width: 440, height: 92 }, {
+    fontSize: 28,
+    bold: true,
+    color: C.white,
+    lineSpacing: 1.3,
+  });
+  addText(slide, '친구와 다른 선택도 좋아요.', { left: 88, top: 594, width: 1056, height: 34 }, {
     fontSize: 24,
-    color: '#BBC5BF',
+    bold: true,
+    color: C.forestSoft,
+    align: 'center',
   });
   addNotes(slide);
 }
@@ -414,9 +420,9 @@ function addPaperStrip(slide, options) {
   const slide = addBase(3, item, { fill: C.sheet });
   addHeading(slide, item);
   const parts = [
-    ['01', '인물', '이야기에 나오는 사람이나 동물'],
-    ['02', '배경', '이야기가 펼쳐지는 때와 장소'],
-    ['03', '사건', '이야기에서 실제로 일어난 일'],
+    ['01', '읽기', '이야기를 끝까지 읽고 누가·어디·무슨 일을 찾아요'],
+    ['02', '사건 순서', '섞인 사건 카드 여섯 개를 이야기대로 옮겨요'],
+    ['03', '장면 기획', '장면마다 네 가지를 우리 생각으로 골라요'],
   ];
   parts.forEach(([number, title, detail], index) => {
     const x = 72 + index * 378;
@@ -427,13 +433,13 @@ function addPaperStrip(slide, options) {
       color: C.cinnabar,
     });
     addText(slide, title, { left: x, top: 336, width: 300, height: 64 }, {
-      fontSize: 44,
+      fontSize: title.length > 4 ? 36 : 42,
       bold: true,
       color: C.forest,
     });
     addRule(slide, x, 418, 300, index === 2 ? C.cinnabar : C.warmLine, index === 2 ? 4 : 1);
     addText(slide, detail, { left: x, top: 452, width: 300, height: 92 }, {
-      fontSize: 24,
+      fontSize: 22,
       color: C.muted,
       lineSpacing: 1.38,
     });
@@ -471,17 +477,23 @@ function addPaperStrip(slide, options) {
       detail,
       titleSize: 28,
       detailSize: 21,
-      fill: index === 0 ? C.forestSoft : C.sheet,
-      lineFill: index === 0 ? C.forest : C.line,
-      lineWidth: index === 0 ? 2 : 1,
+      fill: C.sheet,
+      lineFill: C.line,
+      lineWidth: 1,
     });
     addText(slide, theme, { left: 942, top: y + 28, width: 222, height: 32 }, {
       fontSize: 18,
       bold: true,
-      color: index === 0 ? C.forest : C.cinnabar,
+      color: C.cinnabar,
       align: 'right',
       vertical: 'middle',
     });
+  });
+  addText(slide, '고른 이야기로 마지막 장면까지 활동해요.', { left: 72, top: 616, width: 1136, height: 30 }, {
+    fontSize: 22,
+    bold: true,
+    color: C.forest,
+    align: 'center',
   });
   addNotes(slide, true);
 }
@@ -491,50 +503,46 @@ function addPaperStrip(slide, options) {
   const item = slides[4];
   const slide = addBase(5, item, { fill: C.sheet });
   addHeading(slide, item);
-  addText(slide, '해와 달이 된 오누이', { left: 72, top: 260, width: 300, height: 30 }, {
-    fontSize: 18,
-    bold: true,
-    color: C.cinnabar,
-  });
-  addText(slide, '이야기에 실제로 나오는 인물', { left: 72, top: 314, width: 430, height: 92 }, {
-    fontSize: 38,
+  addText(slide, '읽으면서 이렇게 해요', { left: 72, top: 282, width: 410, height: 48 }, {
+    fontSize: 34,
     bold: true,
     color: C.forest,
-    lineSpacing: 1.25,
   });
-  addRule(slide, 72, 444, 420, C.warmLine, 1);
-  addText(slide, '주인공과 사건을 함께 만드는 인물을 모두 찾습니다.', { left: 72, top: 474, width: 420, height: 78 }, {
-    fontSize: 24,
+  addRule(slide, 72, 354, 420, C.cinnabar, 4);
+  addText(slide, '사람이나 동물 이름이 나오면\n눈으로 한 번 더 확인해요.', { left: 72, top: 392, width: 420, height: 112 }, {
+    fontSize: 27,
     color: C.muted,
-    lineSpacing: 1.4,
+    lineSpacing: 1.35,
   });
-  const characters = [
-    ['오누이', true], ['어머니', true], ['호랑이', true], ['제비', false], ['임금', false],
+  const characterTips = [
+    ['01', '사람·동물 이름을 찾아요'],
+    ['02', '실제로 나온 인물만 골라요'],
+    ['03', '주인공 말고 다른 인물도 봐요'],
   ];
-  characters.forEach(([label, correct], index) => {
-    const y = 272 + index * 66;
-    addRect(slide, { left: 586, top: y, width: 598, height: 52 }, correct ? C.forest : C.paper, {
-      lineFill: correct ? C.forest : C.line,
+  characterTips.forEach(([number, label], index) => {
+    const y = 286 + index * 92;
+    addRect(slide, { left: 586, top: y, width: 598, height: 72 }, index === 0 ? C.forestSoft : C.paper, {
+      lineFill: index === 0 ? C.forest : C.line,
       lineWidth: 1,
     });
-    addText(slide, String(index + 1).padStart(2, '0'), { left: 606, top: y + 8, width: 50, height: 36 }, {
+    addText(slide, number, { left: 610, top: y + 16, width: 52, height: 40 }, {
       fontSize: 15,
       bold: true,
-      color: correct ? C.sand : C.cinnabar,
+      color: C.cinnabar,
       vertical: 'middle',
     });
-    addText(slide, label, { left: 678, top: y + 6, width: 310, height: 40 }, {
-      fontSize: 26,
+    addText(slide, label, { left: 686, top: y + 12, width: 466, height: 48 }, {
+      fontSize: 25,
       bold: true,
-      color: correct ? C.white : C.muted,
+      color: C.forest,
       vertical: 'middle',
     });
-    addText(slide, correct ? '이야기에 나와요' : '다른 이야기 인물', { left: 986, top: y + 8, width: 170, height: 36 }, {
-      fontSize: 17,
-      color: correct ? '#DCE7E1' : C.muted,
-      align: 'right',
-      vertical: 'middle',
-    });
+  });
+  addText(slide, '모르면 읽기 자료로 돌아가 다시 찾아요.', { left: 586, top: 590, width: 598, height: 38 }, {
+    fontSize: 22,
+    bold: true,
+    color: C.cinnabar,
+    align: 'center',
   });
   addNotes(slide, true);
 }
@@ -545,38 +553,37 @@ function addPaperStrip(slide, options) {
   const slide = addBase(6, item, { fill: C.paper });
   addHeading(slide, item);
   const places = [
-    ['01', '산길', '사건이 시작되는 곳'],
-    ['02', '오누이의 집', '위험이 찾아오는 곳'],
-    ['03', '큰 나무', '오누이가 피하는 곳'],
-    ['04', '하늘', '이야기가 마무리되는 곳'],
+    ['01', '시작한 곳', '이야기는 어디에서 시작했나요?'],
+    ['02', '큰일이 생긴 곳', '가장 중요한 일은 어디에서 생겼나요?'],
+    ['03', '끝난 곳', '마지막 장면은 어디인가요?'],
   ];
   places.forEach(([number, title, detail], index) => {
-    const x = 72 + index * 284;
+    const x = 72 + index * 378;
     addText(slide, number, { left: x, top: 292, width: 54, height: 28 }, {
       fontSize: 15,
       bold: true,
       color: C.cinnabar,
     });
-    addText(slide, title, { left: x, top: 346, width: 244, height: 74 }, {
-      fontSize: title.length > 5 ? 30 : 38,
+    addText(slide, title, { left: x, top: 346, width: 330, height: 74 }, {
+      fontSize: title.length > 6 ? 32 : 38,
       bold: true,
       color: C.forest,
       vertical: 'middle',
     });
-    addRule(slide, x, 444, 244, index === 3 ? C.cinnabar : C.warmLine, index === 3 ? 4 : 1);
-    addText(slide, detail, { left: x, top: 472, width: 244, height: 76 }, {
+    addRule(slide, x, 444, 330, index === 2 ? C.cinnabar : C.warmLine, index === 2 ? 4 : 1);
+    addText(slide, detail, { left: x, top: 472, width: 330, height: 88 }, {
       fontSize: 22,
       color: C.muted,
       lineSpacing: 1.35,
     });
-    if (index < 3) addText(slide, '→', { left: x + 246, top: 374, width: 34, height: 42 }, {
+    if (index < 2) addText(slide, '→', { left: x + 332, top: 374, width: 34, height: 42 }, {
       fontSize: 28,
       color: C.cinnabar,
       align: 'center',
       vertical: 'middle',
     });
   });
-  addText(slide, '장소가 바뀌는 순서를 따라가면 사건의 흐름도 보입니다.', { left: 72, top: 600, width: 1136, height: 36 }, {
+  addText(slide, '장소 이름은 읽기 자료에 나온 말에서 찾아요.', { left: 72, top: 600, width: 1136, height: 36 }, {
     fontSize: 25,
     bold: true,
     color: C.forest,
@@ -590,23 +597,33 @@ function addPaperStrip(slide, options) {
   const item = slides[6];
   const slide = addBase(7, item, { fill: C.sheet });
   addHeading(slide, item);
-  storyEvents.forEach((event, index) => {
-    const col = index % 2;
-    const row = Math.floor(index / 2);
-    const x = 72 + col * 578;
-    const y = 270 + row * 112;
-    addPaperStrip(slide, {
-      left: x,
-      top: y,
-      width: 558,
-      height: 92,
-      number: String(index + 1),
-      title: event,
-      titleSize: 23,
-      fill: row % 2 === 0 ? C.paper : C.sheet,
-      lineFill: C.line,
-      shadow: row === 1,
+  const eventChecks = [
+    ['01', '이 일이 빠지면\n이야기가 달라지나요?'],
+    ['02', '인물이 움직이거나\n중요한 선택을 하나요?'],
+    ['03', '문제가 생기거나\n풀리는 장면인가요?'],
+  ];
+  eventChecks.forEach(([number, question], index) => {
+    const x = 72 + index * 378;
+    addText(slide, number, { left: x, top: 286, width: 58, height: 30 }, {
+      fontSize: 16,
+      bold: true,
+      color: C.cinnabar,
     });
+    addText(slide, question, { left: x, top: 346, width: 320, height: 116 }, {
+      fontSize: 28,
+      bold: true,
+      color: C.forest,
+      lineSpacing: 1.28,
+    });
+    addRule(slide, x, 492, 320, index === 2 ? C.cinnabar : C.warmLine, index === 2 ? 4 : 1);
+  });
+  addRect(slide, { left: 72, top: 548, width: 1136, height: 82 }, C.forestSoft);
+  addText(slide, '중요한 일 여섯 개는 웹앱에서 사건 카드로 나와요.', { left: 96, top: 562, width: 1088, height: 54 }, {
+    fontSize: 27,
+    bold: true,
+    color: C.forest,
+    align: 'center',
+    vertical: 'middle',
   });
   addNotes(slide, true);
 }
@@ -704,10 +721,10 @@ function addPaperStrip(slide, options) {
     top: 282,
     width: 450,
     height: 274,
-    number: '03 / 04',
+    number: '1 / 2',
     title: '사건 순서',
-    detail: '우리 모둠이 고른 이야기의 사건 카드를 순서대로 놓습니다.',
-    titleSize: 42,
+    detail: '사건 카드를 옮기고\n‘순서 확인’을 눌러요.',
+    titleSize: 38,
     detailSize: 24,
     fill: C.paper,
     lineFill: C.warmLine,
@@ -715,19 +732,19 @@ function addPaperStrip(slide, options) {
     shadow: true,
   });
   const actions = [
-    ['태블릿', '카드를 손가락으로 끌어서 옮겨요'],
-    ['휴대폰', '앞으로·뒤로 버튼으로 움직여요'],
+    ['사건 순서', '휴대폰은 앞·뒤 버튼으로 옮겨요'],
+    ['장면 기획', '선택지를 눌러 내 생각을 골라요'],
   ];
   actions.forEach(([device, action], index) => {
     const y = 292 + index * 92;
     addText(slide, device, { left: 616, top: y, width: 150, height: 42 }, {
-      fontSize: 23,
+      fontSize: 21,
       bold: true,
       color: C.cinnabar,
       vertical: 'middle',
     });
     addText(slide, action, { left: 782, top: y, width: 394, height: 52 }, {
-      fontSize: 24,
+      fontSize: 23,
       bold: true,
       color: C.forest,
       vertical: 'middle',
@@ -767,26 +784,37 @@ function addPaperStrip(slide, options) {
   const item = slides[10];
   const slide = addBase(11, item, { fill: C.paper });
   addHeading(slide, item);
-  shortEvents.forEach((event, index) => {
-    const col = index % 3;
-    const row = Math.floor(index / 3);
-    const x = 72 + col * 378;
-    const y = 276 + row * 160;
-    addText(slide, String(index + 1).padStart(2, '0'), { left: x, top: y, width: 56, height: 38 }, {
-      fontSize: 23,
+  const sceneQuestions = [
+    ['01', '누가 나오나요?', '이 장면에 꼭 필요한 인물'],
+    ['02', '어디인가요?', '일이 일어나는 장소'],
+    ['03', '어떤 느낌인가요?', '기쁨·걱정·무서움 같은 느낌'],
+    ['04', '무엇을 그리고 싶나요?', '눈에 보이게 넣고 싶은 모습'],
+  ];
+  sceneQuestions.forEach(([number, question, hint], index) => {
+    const col = index % 2;
+    const row = Math.floor(index / 2);
+    const x = 72 + col * 578;
+    const y = 270 + row * 160;
+    addText(slide, number, { left: x, top: y, width: 56, height: 32 }, {
+      fontSize: 17,
       bold: true,
       color: C.cinnabar,
     });
-    addRule(slide, x, y + 52, 330, index === 5 ? C.cinnabar : C.warmLine, index === 5 ? 4 : 1);
-    addText(slide, event, { left: x, top: y + 72, width: 330, height: 68 }, {
-      fontSize: 24,
+    addText(slide, question, { left: x + 76, top: y - 4, width: 450, height: 46 }, {
+      fontSize: 29,
       bold: true,
       color: C.forest,
-      lineSpacing: 1.3,
+      vertical: 'middle',
+    });
+    addRule(slide, x, y + 56, 526, index === 3 ? C.cinnabar : C.warmLine, index === 3 ? 4 : 1);
+    addText(slide, hint, { left: x + 76, top: y + 76, width: 450, height: 52 }, {
+      fontSize: 21,
+      color: C.muted,
+      vertical: 'middle',
     });
   });
-  addText(slide, '한 장면에는 중요한 일 한 가지가 보이게 합니다.', { left: 72, top: 612, width: 1136, height: 34 }, {
-    fontSize: 25,
+  addText(slide, '한 장면씩 네 가지를 고르면 여섯 장면 기획판이 완성돼요.', { left: 72, top: 606, width: 1136, height: 40 }, {
+    fontSize: 24,
     bold: true,
     color: C.forest,
     align: 'center',
@@ -798,48 +826,68 @@ function addPaperStrip(slide, options) {
 {
   const item = slides[11];
   const slide = addBase(12, item, { fill: C.sheet });
-  addHeading(slide, item, { fontSize: 35 });
-  const details = ['표정', '시간', '주변 모습', '중요한 물건', '소리'];
-  details.forEach((detail, index) => {
-    const y = 266 + index * 68;
-    addText(slide, String(index + 1).padStart(2, '0'), { left: 76, top: y, width: 54, height: 44 }, {
-      fontSize: 15,
+  addHeading(slide, item, { fontSize: 38 });
+  addRect(slide, { left: 72, top: 250, width: 1136, height: 58 }, C.forestSoft, {
+    lineFill: C.forest,
+    lineWidth: 1,
+  });
+  addText(slide, '사건 2  ·  산길에서 호랑이가 어머니를 만나요.', { left: 96, top: 260, width: 1088, height: 38 }, {
+    fontSize: 24,
+    bold: true,
+    color: C.forest,
+    vertical: 'middle',
+  });
+  const details = [
+    ['누가', '어머니와 호랑이'],
+    ['어디', '깜깜한 산길'],
+    ['느낌', '무서워요'],
+    ['그리고 싶은 모습', '입을 크게 벌린 호랑이'],
+  ];
+  details.forEach(([label, choice], index) => {
+    const y = 334 + index * 64;
+    addText(slide, String(index + 1).padStart(2, '0'), { left: 76, top: y, width: 48, height: 42 }, {
+      fontSize: 14,
       bold: true,
       color: C.cinnabar,
       vertical: 'middle',
     });
-    addText(slide, detail, { left: 150, top: y, width: 360, height: 44 }, {
-      fontSize: 29,
+    addText(slide, label, { left: 144, top: y, width: 220, height: 42 }, {
+      fontSize: 23,
       bold: true,
       color: C.forest,
       vertical: 'middle',
     });
-    addRule(slide, 150, y + 54, 430, C.line, 1);
+    addText(slide, choice, { left: 350, top: y, width: 300, height: 42 }, {
+      fontSize: 23,
+      bold: true,
+      color: C.ink,
+      vertical: 'middle',
+    });
+    addRule(slide, 144, y + 52, 506, C.line, 1);
   });
-  addRect(slide, { left: 676, top: 266, width: 500, height: 334 }, C.paper, {
+  addRect(slide, { left: 714, top: 334, width: 462, height: 256 }, C.paper, {
     lineFill: C.warmLine,
     lineWidth: 1,
   });
-  addText(slide, '각 장면마다 하나씩', { left: 716, top: 304, width: 420, height: 58 }, {
-    fontSize: 37,
+  addText(slide, '한 가지 예예요', { left: 754, top: 368, width: 382, height: 52 }, {
+    fontSize: 32,
     bold: true,
     color: C.forest,
     align: 'center',
   });
-  addRule(slide, 842, 390, 168, C.cinnabar, 5);
-  addText(slide, '장면을 이해하는 데 꼭 필요한 추가 정보 한 가지씩을 골라요.', { left: 712, top: 424, width: 428, height: 76 }, {
-    fontSize: 24,
+  addRule(slide, 854, 438, 182, C.cinnabar, 4);
+  addText(slide, '다른 느낌이나 모습을 골라도\n맞는 기획이에요.', { left: 754, top: 468, width: 382, height: 78 }, {
+    fontSize: 23,
+    bold: true,
     color: C.muted,
     lineSpacing: 1.35,
     align: 'center',
   });
-  addRect(slide, { left: 708, top: 522, width: 436, height: 52 }, C.forestSoft);
-  addText(slide, 'AI에게도 장면을 자세히 알려줘야 해요.', { left: 724, top: 530, width: 404, height: 36 }, {
+  addText(slide, '장면이 눈앞에 떠오르는 말을 골라요.', { left: 72, top: 616, width: 1136, height: 30 }, {
     fontSize: 22,
     bold: true,
-    color: C.forest,
+    color: C.cinnabar,
     align: 'center',
-    vertical: 'middle',
   });
   addNotes(slide, true);
 }
@@ -860,27 +908,29 @@ function addPaperStrip(slide, options) {
     subtitleTop: 164,
     subtitleColor: '#D1D7D2',
   });
-  const words = ['인물', '배경', '사건'];
-  words.forEach((word, index) => {
-    addText(slide, word, { left: 92 + index * 370, top: 286, width: 330, height: 54 }, {
-      fontSize: 31,
+  const scenes = ['01', '02', '03', '04', '05', '06'];
+  scenes.forEach((number, index) => {
+    const col = index % 3;
+    const row = Math.floor(index / 3);
+    const x = 92 + col * 370;
+    const y = 276 + row * 132;
+    addText(slide, number, { left: x, top: y, width: 48, height: 36 }, {
+      fontSize: 18,
       bold: true,
       color: '#D58A7E',
-      align: 'center',
       vertical: 'middle',
     });
-    addRule(slide, 92 + index * 370, 360, 330, '#53615A', 1);
+    addRule(slide, x, y + 50, 330, index === 5 ? C.cinnabar : '#53615A', index === 5 ? 4 : 1);
+    addText(slide, '누가 · 어디 · 느낌 · 모습', { left: x, top: y + 70, width: 330, height: 34 }, {
+      fontSize: 21,
+      bold: true,
+      color: C.white,
+      vertical: 'middle',
+    });
   });
-  addText(slide, '여섯 장면의 이야기 뼈대', { left: 150, top: 414, width: 980, height: 84 }, {
-    fontSize: 54,
-    bold: true,
-    color: C.white,
-    align: 'center',
-    vertical: 'middle',
-  });
-  addRect(slide, { left: 330, top: 552, width: 620, height: 56 }, C.forestSoft);
-  addText(slide, '우리 모둠 이야기판 완성', { left: 354, top: 562, width: 572, height: 36 }, {
-    fontSize: 26,
+  addRect(slide, { left: 330, top: 576, width: 620, height: 52 }, C.forestSoft);
+  addText(slide, '여섯 장면 모두 골랐으면 2차시 완료', { left: 354, top: 584, width: 572, height: 36 }, {
+    fontSize: 23,
     bold: true,
     color: C.forest,
     align: 'center',
