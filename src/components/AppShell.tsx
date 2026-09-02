@@ -4,22 +4,29 @@ import { Link } from 'react-router-dom';
 type Props = {
   children: ReactNode;
   compact?: boolean;
+  lessonNumber?: 1 | 2;
 };
 
-export default function AppShell({ children, compact = false }: Props) {
+export default function AppShell({ children, compact = false, lessonNumber = 2 }: Props) {
+  const shellClassName = [
+    'app-shell',
+    compact ? 'compact-shell' : '',
+    lessonNumber === 2 ? 'lesson-two-shell' : '',
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className={compact ? 'app-shell compact-shell' : 'app-shell'}>
+    <div className={shellClassName}>
       <header className="site-header no-print">
         <Link to="/" className="brand" aria-label="홈으로 이동">
-          <span className="brand-mark">01</span>
+          <span className="brand-mark">{String(lessonNumber).padStart(2, '0')}</span>
           <span>
             <strong>우리 옛이야기 그림책</strong>
             <small>AI+교과 융합 수업</small>
           </span>
         </Link>
         <nav aria-label="주요 메뉴">
-          <Link to="/present/1">수업용 PPT</Link>
-          <Link to="/lesson/1">학생용 웹앱</Link>
+          <Link to={`/present/${lessonNumber}`}>수업용 PPT</Link>
+          <Link to={`/lesson/${lessonNumber}`}>학생용 웹앱</Link>
           <Link to="/teacher">교사 설정</Link>
         </nav>
       </header>
