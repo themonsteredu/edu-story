@@ -121,7 +121,6 @@
 }
 
 .presentation-cover-art,
-.prompt-picture,
 .slide-compare figure {
   position: relative;
   margin: 0;
@@ -136,7 +135,6 @@
 }
 
 .presentation-cover-art img,
-.prompt-picture img,
 .slide-compare figure img {
   width: 100%;
   height: 100%;
@@ -149,7 +147,6 @@
 }
 
 .presentation-cover-art figcaption,
-.prompt-picture figcaption,
 .slide-compare figure figcaption {
   position: absolute;
   left: 16px;
@@ -223,10 +220,6 @@
   font-size: 16px;
 }
 
-.prompt-picture {
-  height: min(56vh, 500px);
-}
-
 .imagination-sheet {
   width: 100%;
   min-height: 410px;
@@ -275,16 +268,6 @@
   min-height: 330px;
   border: 2px solid #b9c9c3;
   border-radius: 12px;
-}
-
-.slide-compare .student-sketch {
-  padding: 24px;
-  justify-content: flex-start;
-  background: repeating-linear-gradient(#fffdf7 0 42px, #d6dfdb 43px 44px);
-}
-
-.student-sketch i {
-  min-height: 200px;
 }
 
 .observation-chart {
@@ -398,8 +381,7 @@
     overflow-y: auto;
   }
 
-  .presentation-cover-art,
-  .prompt-picture {
+  .presentation-cover-art {
     height: 360px;
   }
 }
@@ -441,8 +423,7 @@
     font-size: 56px;
   }
 
-  .presentation-cover-art,
-  .prompt-picture {
+  .presentation-cover-art {
     height: 280px;
   }
 }

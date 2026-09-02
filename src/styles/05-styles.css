@@ -504,8 +504,6 @@
     min-height: 205px;
   }
 
-  .compare-panel > img,
-  .compare-panel .rain-illustration,
   .text-imagination {
     height: 260px;
   }
@@ -530,14 +528,6 @@
 
   .resource-grid {
     grid-template-columns: 1fr;
-  }
-
-  .image-register {
-    grid-template-columns: 1fr;
-  }
-
-  .registered-image {
-    height: 180px;
   }
 
   .web-slide {

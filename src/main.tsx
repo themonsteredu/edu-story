@@ -8,6 +8,7 @@ import './styles/03-styles.css';
 import './styles/04-styles.css';
 import './styles/05-styles.css';
 import './styles/06-styles.css';
+import './styles/07-editorial.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -1,155 +1,95 @@
-import type { Slide } from '../types';
-
-export const lessonOnePrompt =
-  '비 오는 날, 빨간 우산을 쓴 아이가 골목길을 걷고 있습니다.';
+import type { AiFunction, Slide } from '../types';
 
 export const aiScenes = [
   {
     id: 'video-recommendation',
-    icon: '▶',
-    title: '내가 좋아할 영상을 추천해요',
-    description: '전에 본 영상과 비슷한 영상을 골라 보여 줍니다.',
+    icon: '01',
+    title: '시청 기록을 보고 영상을 추천해요',
+    description: '전에 본 영상과 비슷한 특징의 영상을 골라 보여 줍니다.',
+    image: '/assets/lesson-01/streaming-real.webp',
     usesAi: true,
     reason: '이용 기록에서 비슷한 특징을 찾아 추천하기 때문이에요.',
   },
   {
-    id: 'voice-assistant',
-    icon: '♪',
-    title: '말로 오늘 날씨를 물어봐요',
-    description: '사람의 말을 알아듣고 알맞은 정보를 찾아 줍니다.',
+    id: 'voice-recognition',
+    icon: '02',
+    title: '사람의 말을 글자로 바꾸어요',
+    description: '말소리의 특징을 살펴 어떤 말인지 알아봅니다.',
+    image: '/assets/lesson-01/smart-speaker-real.webp',
     usesAi: true,
-    reason: '말소리의 특징을 살펴 뜻을 알아내기 때문이에요.',
+    reason: '학습한 말소리 자료를 바탕으로 소리를 인식하기 때문이에요.',
   },
   {
-    id: 'face-unlock',
-    icon: '◎',
-    title: '얼굴을 보고 휴대폰 잠금을 풀어요',
-    description: '등록한 얼굴과 지금 보이는 얼굴을 비교합니다.',
+    id: 'face-recognition',
+    icon: '03',
+    title: '카메라가 얼굴을 찾아 표시해요',
+    description: '화면에 들어온 얼굴의 위치와 특징을 찾아냅니다.',
+    image: '/assets/lesson-01/face-recognition-real.webp',
     usesAi: true,
-    reason: '사진 속 얼굴의 특징을 찾아 비교하기 때문이에요.',
+    reason: '얼굴의 여러 특징을 찾아 얼굴인지 인식하기 때문이에요.',
   },
   {
-    id: 'lamp-switch',
-    icon: '●',
-    title: '스위치를 눌러 전등을 켜요',
-    description: '사람이 누른 스위치에 따라 전기가 켜집니다.',
+    id: 'automatic-door',
+    icon: '04',
+    title: '센서가 움직임을 감지하면 문이 열려요',
+    description: '움직임이 감지되면 열리도록 정해진 조건대로 작동합니다.',
+    image: '/assets/lesson-01/automatic-door-real.webp',
     usesAi: false,
-    reason: '정해진 스위치 동작만 수행하고 스스로 구별하거나 판단하지 않아요.',
+    reason: '이 사례는 자료를 학습해 판단하지 않고 정해진 조건대로 움직여요.',
   },
   {
     id: 'ruler',
-    icon: '↔',
+    icon: '05',
     title: '자로 연필의 길이를 재요',
     description: '눈금을 보고 사람이 직접 길이를 읽습니다.',
+    image: '/assets/lesson-01/ruler-real.webp',
     usesAi: false,
-    reason: '도구가 자료를 학습하거나 특징을 판단하지 않아요.',
+    reason: '도구가 데이터를 학습하거나 특징을 판단하지 않아요.',
   },
   {
-    id: 'translation',
-    icon: '가A',
-    title: '한국어 문장을 다른 말로 번역해요',
-    description: '문장의 뜻과 어울리는 다른 언어 표현을 제안합니다.',
+    id: 'photo-classification',
+    icon: '06',
+    title: '사진을 동물과 식물로 나누어요',
+    description: '사진에서 보이는 특징을 찾아 알맞은 모둠으로 분류합니다.',
+    image: '/assets/lesson-01/photo-classification-real.webp',
     usesAi: true,
-    reason: '많은 문장 자료에서 언어의 규칙과 관계를 배웠기 때문이에요.',
+    reason: '많은 사진에서 학습한 특징을 바탕으로 종류를 분류하기 때문이에요.',
   },
 ] as const;
 
-export const imaginationOptions = {
-  expression: ['웃고 있어요', '걱정스러워 보여요', '무표정이에요'],
-  time: ['낮', '해 질 무렵', '밤'],
-  mood: ['밝고 따뜻해요', '조용하고 쓸쓸해요', '오래되고 좁아요'],
-  rain: ['보슬비', '세찬 비', '비가 거의 그친 뒤'],
-};
+export const functionCases: Array<{
+  id: string;
+  number: string;
+  title: string;
+  clue: string;
+  category: AiFunction;
+}> = [
+  { id: 'watch', number: '01', title: '좋아할 영상 제안', clue: '시청 기록을 보고 다음 영상을 제안한다.', category: '추천' },
+  { id: 'book', number: '02', title: '다음 책 제안', clue: '읽은 책 기록과 비슷한 책을 제안한다.', category: '추천' },
+  { id: 'face', number: '03', title: '얼굴 잠금 해제', clue: '등록 얼굴과 지금 얼굴의 특징을 비교한다.', category: '인식' },
+  { id: 'speech', number: '04', title: '말을 글자로 변환', clue: '말소리의 특징을 살펴 글자로 바꾼다.', category: '인식' },
+  { id: 'nature', number: '05', title: '동물·식물 사진 나누기', clue: '사진의 특징을 찾아 알맞은 모둠에 넣는다.', category: '분류' },
+  { id: 'spam', number: '06', title: '스팸 메일 가려내기', clue: '메일의 특징을 보고 스팸함으로 보낸다.', category: '분류' },
+  { id: 'timer', number: '07', title: '10분 뒤 알람', clue: '설정한 시간이 지나면 알람이 울린다.', category: '자동기계' },
+  { id: 'door', number: '08', title: '센서 자동문', clue: '움직임이 감지되면 문이 열린다.', category: '자동기계' },
+];
+
+export const functionOptions: AiFunction[] = ['추천', '인식', '분류', '자동기계'];
 
 export const lessonOneSlides: Slide[] = [
-  {
-    kicker: 'AI와 함께 만드는 우리 옛이야기 그림책',
-    title: '사람과 AI, 누가 더 잘 볼까?',
-    subtitle: '1차시 · 창체+국어 · LOOK',
-    visual: 'cover',
-  },
-  {
-    kicker: '오늘의 핵심 질문',
-    title: '같은 문장을 들어도 사람과 AI는 똑같이 이해할까요?',
-    visual: 'question',
-  },
-  {
-    kicker: '생각 열기',
-    title: '오늘 하루 동안 AI를 만난 적이 있나요?',
-    subtitle: '집, 길, 학교, 휴대폰 속 장면을 떠올려 봅시다.',
-    visual: 'memory',
-  },
-  {
-    kicker: '활동 1',
-    title: '생활 속에서 AI가 쓰이는 장면을 찾아봅시다.',
-    visual: 'ai-scenes',
-  },
-  {
-    kicker: '학생 웹 활동',
-    title: 'AI라고 생각하는 장면을 모두 선택하세요.',
-    subtitle: '선택한 까닭도 함께 살펴봅니다.',
-    visual: 'activity',
-  },
-  {
-    kicker: '중간 정리',
-    title: '모든 자동 기계가 AI인 것은 아닙니다.',
-    subtitle: '오늘은 자료의 특징을 구별하거나, 비슷한 것을 찾아 결과를 내는 장면에 주목합니다.',
-    visual: 'ai-scenes',
-  },
-  {
-    kicker: '활동 2',
-    title: '같은 문장을 함께 읽어 봅시다.',
-    subtitle: lessonOnePrompt,
-    visual: 'prompt',
-  },
-  {
-    kicker: '먼저, 사람',
-    title: '내 머릿속에는 어떤 장면이 떠올랐나요?',
-    subtitle: '표정, 시간, 골목 분위기, 비의 모습은 사람마다 다를 수 있습니다.',
-    visual: 'imagination',
-  },
-  {
-    kicker: '이제, AI',
-    title: '교사가 같은 문장을 AI 이미지 생성 도구에 입력합니다.',
-    subtitle: 'AI에게 문장을 더 설명하지 않고 먼저 결과를 살펴봅니다.',
-    visual: 'teacher-demo',
-  },
-  {
-    kicker: '비교하기',
-    title: '내가 상상한 그림과 AI가 만든 그림을 나란히 봅시다.',
-    visual: 'compare',
-  },
-  {
-    kicker: '관찰하기',
-    title: '같았던 점과 달랐던 점은 무엇인가요?',
-    subtitle: '좋다·나쁘다가 아니라, 눈에 보이는 근거로 말해 봅시다.',
-    visual: 'same-different',
-  },
-  {
-    kicker: '생각 넓히기',
-    title: '왜 같은 문장에서 서로 다른 그림이 나왔을까요?',
-    visual: 'why',
-  },
-  {
-    kicker: '사람의 이해',
-    title: '사람은 경험과 기억을 떠올리며 장면을 상상합니다.',
-    subtitle: '예전에 본 골목, 비 오는 날의 느낌, 우산을 썼던 기억이 함께 작용합니다.',
-    visual: 'human',
-  },
-  {
-    kicker: 'AI의 이해',
-    title: 'AI는 학습한 데이터에서 비슷한 특징과 관계를 찾아 결과를 만듭니다.',
-    subtitle: '입력한 말이 구체적이지 않으면 AI가 채운 부분이 많아질 수 있습니다.',
-    visual: 'ai',
-  },
-  {
-    kicker: '오늘의 정리',
-    title: '사람은 경험으로, AI는 데이터로 이해합니다.',
-    bullets: [
-      '생활 속 AI 활용 장면을 찾았습니다.',
-      '같은 문장을 보고 사람과 AI의 그림을 비교했습니다.',
-      '서로 다른 이해 방식이 결과에 영향을 준다는 점을 알았습니다.',
-    ],
-    visual: 'summary',
-  },
+  { kicker: 'AI와 함께 만드는 우리 옛이야기 그림책', title: '자동으로 움직이면 모두 AI일까?', subtitle: '1차시 · 창체+국어 · LOOK', visual: 'cover' },
+  { kicker: '오늘의 핵심 질문', title: '자동으로 움직이는 기계는 모두 AI일까요?', subtitle: '무엇을 보고, 어떤 방법으로 결과를 내는지 관찰합니다.', visual: 'question' },
+  { kicker: '오늘의 목표', title: 'AI와 자동기계를 작동 근거로 구별해 봅시다.', bullets: ['추천·인식·분류 기능 찾기', '정해진 조건과 순서 찾기', '내 선택을 근거로 설명하기'], visual: 'observation' },
+  { kicker: '활동 1', title: '생활 속 장면 여섯 가지를 자세히 봅시다.', subtitle: '겉모습보다 기기가 하는 일에 주목합니다.', visual: 'ai-scenes' },
+  { kicker: '학생 활동지 ①', title: '여덟 사례에 알맞은 기능 이름을 쓰세요.', subtitle: '추천 · 인식 · 분류 · 자동기계 중 하나를 고르고 까닭을 말합니다.', visual: 'worksheet' },
+  { kicker: '자동기계', title: '정해진 조건이 맞으면 정해진 동작을 합니다.', subtitle: '센서 자동문과 타이머는 이 수업에서 자동기계 사례로 봅니다.', visual: 'automatic' },
+  { kicker: 'AI', title: '학습된 데이터를 이용해 특징을 찾고 결과를 냅니다.', subtitle: '어떤 정보를 사용했는지 살펴보면 AI 기능을 찾기 쉽습니다.', visual: 'ai-data' },
+  { kicker: 'AI의 세 기능', title: '오늘은 추천·인식·분류를 살펴봅니다.', visual: 'functions' },
+  { kicker: '추천', title: '기록에서 비슷한 특징을 찾아 다음 것을 제안합니다.', subtitle: '예: 영상 추천, 책 추천', visual: 'recommendation' },
+  { kicker: '인식', title: '소리나 얼굴의 특징을 찾아 무엇인지 알아봅니다.', subtitle: '예: 음성 인식, 얼굴 인식', visual: 'recognition' },
+  { kicker: '분류', title: '특징이 비슷한 자료를 알맞은 모둠으로 나눕니다.', subtitle: '예: 사진 분류, 스팸 메일 분류', visual: 'classification' },
+  { kicker: '모둠 활동', title: '여덟 가지 사례를 네 영역으로 나누어 봅시다.', subtitle: '추천 · 인식 · 분류 · 자동기계', visual: 'sort' },
+  { kicker: '함께 확인', title: '결과보다 선택한 근거를 먼저 말해 봅시다.', subtitle: '“이 사례는 ___ 정보를 보고 ___하기 때문입니다.”', visual: 'answer' },
+  { kicker: '주의할 점', title: '같은 기기도 작동 방식에 따라 답이 달라질 수 있습니다.', subtitle: '제품 이름만 보지 말고 제시된 작동 설명을 읽습니다.', visual: 'caution' },
+  { kicker: '오늘의 정리', title: 'AI는 데이터로 판단하고, 자동기계는 정해진 조건과 순서로 작동합니다.', bullets: ['추천·인식·분류 기능을 찾았습니다.', '자동기계와 AI를 작동 근거로 구별했습니다.', '선택한 이유를 문장으로 설명했습니다.'], visual: 'summary' },
 ];
