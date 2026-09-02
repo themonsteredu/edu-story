@@ -87,7 +87,7 @@ export default function LessonOnePage() {
   };
 
   return (
-    <AppShell compact>
+    <AppShell compact lessonNumber={1}>
       <main className="lesson-page">
         <section className="lesson-topbar">
           <div>

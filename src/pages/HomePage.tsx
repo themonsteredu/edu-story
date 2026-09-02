@@ -16,84 +16,81 @@ const lessons = [
 
 export default function HomePage() {
   return (
-    <AppShell>
-      <main>
-        <section className="home-hero">
-          <div className="hero-copy">
-            <span className="eyebrow">AI+교과 융합 프로젝트 · 초등 3~4학년</span>
+    <AppShell lessonNumber={2}>
+      <main className="lesson-two-home">
+        <section className="lesson-two-home-hero">
+          <div className="lesson-two-home-intro">
+            <span>AI+교과 융합 프로젝트 · 초등 3~4학년</span>
             <h1>AI와 함께 만드는 우리 옛이야기 그림책</h1>
             <p>
-              생활 속 AI를 바르게 이해하고, 이야기를 데이터로 정리한 뒤
-              직접 만든 그림·소리·플립북으로 완성하는 10차시 프로젝트입니다.
+              옛이야기를 자세히 읽고, 인물·사건·배경을 찾아 여섯 장면의 그림책으로 완성합니다.
             </p>
-            <div className="hero-actions">
-              <Link className="button primary" to="/present/1">수업용 PPT</Link>
-              <Link className="button secondary" to="/lesson/1">학생용 웹앱 <small>선택</small></Link>
+            <dl>
+              <div><dt>수업</dt><dd>총 10차시</dd></div>
+              <div><dt>현재</dt><dd>2차시</dd></div>
+              <div><dt>단계</dt><dd>LOOK</dd></div>
+            </dl>
+          </div>
+
+          <div className="lesson-two-home-current">
+            <span>LESSON 02</span>
+            <strong>우리가 만들 이야기 정하기</strong>
+            <p>생성형 AI 없이, 교사가 검토한 고정 옛이야기로 활동합니다.</p>
+            <div>
+              <Link to="/present/2">수업용 PPT</Link>
+              <Link to="/lesson/2">학생용 웹앱</Link>
             </div>
-            <span className="hero-edition">LESSON 01 · LOOK</span>
+            <small>학생은 글을 길게 쓰지 않고 고르기·옮기기·말하기로 참여합니다.</small>
           </div>
-          <figure className="hero-visual">
-            <img src="/assets/lesson-01/classroom-real.webp" alt="교실에서 학생들이 종이 활동을 하는 실제 사진" />
-            <figcaption>생활 속 AI의 작동 방식을 실제 사례로 관찰합니다.</figcaption>
-          </figure>
         </section>
 
-        <section className="home-launch section-wrap" aria-labelledby="lesson-one-launch">
-          <div className="launch-heading">
-            <span className="eyebrow">1차시 기본 운영</span>
-            <h2 id="lesson-one-launch">자동으로 움직이면 모두 AI일까?</h2>
-            <p>교사는 PPT를 진행하고, 학생은 종이 활동지에 ○표하며 생각을 말합니다.</p>
-          </div>
-          <div className="launch-options">
-            <article className="launch-option primary-option">
-              <span className="launch-number">01</span>
-              <div>
-                <small>교사용</small>
-                <h3>수업용 PPT</h3>
-                <p>추천·인식·분류와 자동기계를 실제 사례로 구별하는 수업을 진행합니다.</p>
-              </div>
-              <Link className="button primary" to="/present/1">PPT 시작하기</Link>
+        <section className="lesson-two-launch section-wrap" aria-labelledby="ready-lessons-title">
+          <header>
+            <span>수업 바로가기</span>
+            <h2 id="ready-lessons-title">완성된 차시를 선택하세요.</h2>
+          </header>
+
+          <div className="lesson-two-launch-list">
+            <article>
+              <span>01</span>
+              <div><small>LOOK</small><h3>자동으로 움직이면 모두 AI일까?</h3><p>PPT와 종이 활동지를 기본으로 진행합니다.</p></div>
+              <nav aria-label="1차시 실행">
+                <Link to="/present/1">수업용 PPT</Link>
+                <Link to="/lesson/1">학생 웹앱 · 선택</Link>
+              </nav>
             </article>
-            <article className="launch-option">
-              <span className="launch-number">02</span>
-              <div>
-                <small>학생 활동</small>
-                <h3>활동지로 기록하기</h3>
-                <p>학생은 여덟 가지 사례에 ○표하고 선택한 까닭은 짝과 말로 나눕니다.</p>
-              </div>
-              <Link className="button secondary" to="/teacher">활동지·교사자료</Link>
+            <article className="current">
+              <span>02</span>
+              <div><small>현재 수업 · LOOK</small><h3>우리가 만들 이야기 정하기</h3><p>사건 카드 여섯 개를 옮겨 이야기판을 완성합니다.</p></div>
+              <nav aria-label="2차시 실행">
+                <Link to="/present/2">수업용 PPT</Link>
+                <Link to="/lesson/2">학생용 웹앱</Link>
+              </nav>
             </article>
           </div>
-          <p className="optional-webapp-note">
-            활동지·지도안·교사용 답안은 <Link to="/teacher">교사 설정(3035)</Link>에 있습니다.
-            태블릿을 쓰는 수업에서만 <Link to="/lesson/1">학생용 웹앱</Link>을 선택해 주세요.
+
+          <p className="lesson-two-teacher-note">
+            학생 활동지·수업지도안·교사용 답안은 <Link to="/teacher">교사 설정</Link>에서 확인합니다.
           </p>
-        </section>
-
-        <section className="program-strip" aria-label="프로그램 개요">
-          <div><strong>10차시</strong><span>프로젝트 수업</span></div>
-          <div><strong>초등 3~4학년</strong><span>권장 대상</span></div>
-          <div><strong>국어·창체·수학·음악·미술·도덕</strong><span>교과 융합</span></div>
-          <div><strong>플립북 영상</strong><span>최종 결과물</span></div>
         </section>
 
         <section className="lesson-roadmap section-wrap">
           <div className="section-heading">
             <span className="eyebrow">10차시 로드맵</span>
             <h2>한 차시씩 완성해 가는 그림책 프로젝트</h2>
-            <p>현재는 1차시가 열려 있으며, 다음 차시는 순차적으로 연결합니다.</p>
+            <p>1·2차시가 열려 있으며, 다음 차시는 순서대로 연결합니다.</p>
           </div>
           <div className="roadmap-list">
             {lessons.map(([number, title, description, phase], index) => (
-              <article key={number} className={index === 0 ? 'roadmap-item active' : 'roadmap-item locked'}>
+              <article key={number} className={index < 2 ? 'roadmap-item active' : 'roadmap-item locked'}>
                 <div className="lesson-number">{number.padStart(2, '0')}</div>
                 <div className="lesson-info">
                   <span className={`phase-tag ${phase.toLowerCase()}`}>{phase}</span>
                   <h3>{title}</h3>
                   <p>{description}</p>
                 </div>
-                {index === 0 ? (
-                  <Link className="lesson-link" to="/present/1">수업 PPT →</Link>
+                {index < 2 ? (
+                  <Link className="lesson-link" to={`/present/${index + 1}`}>수업 PPT →</Link>
                 ) : (
                   <span className="lesson-link muted">순차 제작</span>
                 )}
