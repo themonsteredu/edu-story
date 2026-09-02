@@ -23,28 +23,23 @@ export default function AnswerKeyPage() {
           </tbody></table>
         </section>
         <section className="answer-section">
-          <h2><b>2</b> 구별한 까닭</h2>
-          <p><strong>예시</strong> 영상 추천은 시청 기록에서 비슷한 특징을 찾아 고른다. 자동문은 센서가 사람을 감지하면 문을 여는 정해진 동작을 한다.</p>
-          <p className="teacher-question">추가 발문: “결과가 달라지려면 데이터가 달라져야 할까요, 정해진 조건이 달라져야 할까요?”</p>
+          <h2><b>2</b> 핵심 낱말 선택 답</h2>
+          <div className="answer-sentence">AI: <strong>데이터</strong>　·　자동 기계: <strong>정해진 조건</strong></div>
         </section>
         <section className="answer-section concept-answer">
-          <h2><b>3</b> 핵심 개념</h2>
-          <div className="answer-sentence">자동 기계는 <strong>정해진 조건과 규칙</strong>에 따라 움직이고, AI는 데이터에서 <strong>특징과 관계</strong>를 찾아 추천·인식·분류한다.</div>
-          <p>‘정해진 조건(규칙)’과 ‘데이터의 특징(관계)’이라는 차이가 드러나면 인정한다. 센서나 인터넷이 있다는 이유만으로 AI라고 판단하지 않도록 설명한다.</p>
+          <h2><b>3</b> 두 장면 선택 답</h2>
+          <p><strong>영상 고르기</strong> AI · 기록에서 특징을 찾음</p>
+          <p><strong>10분 뒤 알람</strong> 자동 기계 · 정해진 시간이 지나면 움직임</p>
         </section>
         <section className="answer-section">
-          <h2><b>4</b> 성찰 문장 예시</h2>
-          <ul>
-            <li>자동으로 움직인다고 해서 모두 AI인 것은 아니라는 것을 알았다.</li>
-            <li>AI는 데이터의 특징을 찾아 추천하거나 인식하거나 분류할 수 있다.</li>
-            <li>자동문은 정해진 조건에 따라 움직이므로 AI와 다르다.</li>
-          </ul>
+          <h2><b>4</b> 자기 확인 지도</h2>
+          <p>자기 확인은 정답을 매기지 않습니다. ‘조금 헷갈려요’ 또는 ‘더 알아볼래요’를 고른 학생에게 사례를 하나씩 다시 말로 설명하게 합니다.</p>
         </section>
         <section className="teacher-caution">
           <h2>지도 유의점</h2>
           <p>제품 이름이나 겉모습만으로 판단하지 않는다. 실제 기기에는 여러 기능이 함께 들어갈 수 있으므로, 이 수업에서는 제시된 기능이 결과를 정하는 방식에 초점을 둔다.</p>
         </section>
-        <footer className="sheet-footer"><span>정답과 함께 구별 근거를 평가</span><span>더몬스터학원 · EDU STORY</span></footer>
+        <footer className="sheet-footer"><span>선택 결과와 말로 설명한 까닭을 함께 확인</span><span>더몬스터학원 · EDU STORY</span></footer>
       </article>
     </main>
   );
