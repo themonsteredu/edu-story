@@ -12,6 +12,9 @@ import './styles/07-editorial.css';
 import './styles/08-lesson-two.css';
 import './styles/09-lesson-two-presentation.css';
 import './styles/10-lesson-two-home-teacher.css';
+import './styles/11-lesson-three.css';
+import './styles/12-lesson-three-presentation.css';
+import './styles/13-lesson-three-home-teacher.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

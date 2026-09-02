@@ -4,6 +4,8 @@ import LessonOnePage from './pages/LessonOnePage';
 import PresentationPage from './pages/PresentationPage';
 import LessonTwoPage from './pages/LessonTwoPage';
 import LessonTwoPresentationPage from './pages/LessonTwoPresentationPage';
+import LessonThreePage from './pages/LessonThreePage';
+import LessonThreePresentationPage from './pages/LessonThreePresentationPage';
 import TeacherPage from './pages/TeacherPage';
 import WorksheetPage from './pages/resources/WorksheetPage';
 import LessonPlanPage from './pages/resources/LessonPlanPage';
@@ -14,6 +16,11 @@ import LessonTwoLessonPlanPage from './pages/resources/LessonTwoLessonPlanPage';
 import LessonTwoAnswerKeyPage from './pages/resources/LessonTwoAnswerKeyPage';
 import LessonTwoPrepChecklistPage from './pages/resources/LessonTwoPrepChecklistPage';
 import LessonTwoReadingPage from './pages/resources/LessonTwoReadingPage';
+import LessonThreeWorksheetPage from './pages/resources/LessonThreeWorksheetPage';
+import LessonThreeLessonPlanPage from './pages/resources/LessonThreeLessonPlanPage';
+import LessonThreeAnswerKeyPage from './pages/resources/LessonThreeAnswerKeyPage';
+import LessonThreePrepChecklistPage from './pages/resources/LessonThreePrepChecklistPage';
+import LessonThreeDataCardsPage from './pages/resources/LessonThreeDataCardsPage';
 import TeacherOnlyRoute from './components/TeacherOnlyRoute';
 
 export default function App() {
@@ -24,6 +31,8 @@ export default function App() {
       <Route path="/present/1" element={<PresentationPage />} />
       <Route path="/lesson/2" element={<LessonTwoPage />} />
       <Route path="/present/2" element={<LessonTwoPresentationPage />} />
+      <Route path="/lesson/3" element={<LessonThreePage />} />
+      <Route path="/present/3" element={<LessonThreePresentationPage />} />
       <Route path="/teacher" element={<TeacherPage />} />
       <Route element={<TeacherOnlyRoute />}>
         <Route path="/teacher/resources/lesson-1/worksheet" element={<WorksheetPage />} />
@@ -35,6 +44,11 @@ export default function App() {
         <Route path="/teacher/resources/lesson-2/answer-key" element={<LessonTwoAnswerKeyPage />} />
         <Route path="/teacher/resources/lesson-2/prep" element={<LessonTwoPrepChecklistPage />} />
         <Route path="/teacher/resources/lesson-2/reading" element={<LessonTwoReadingPage />} />
+        <Route path="/teacher/resources/lesson-3/worksheet" element={<LessonThreeWorksheetPage />} />
+        <Route path="/teacher/resources/lesson-3/lesson-plan" element={<LessonThreeLessonPlanPage />} />
+        <Route path="/teacher/resources/lesson-3/answer-key" element={<LessonThreeAnswerKeyPage />} />
+        <Route path="/teacher/resources/lesson-3/prep" element={<LessonThreePrepChecklistPage />} />
+        <Route path="/teacher/resources/lesson-3/data-cards" element={<LessonThreeDataCardsPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

@@ -16,31 +16,31 @@ const lessons = [
 
 export default function HomePage() {
   return (
-    <AppShell lessonNumber={2}>
+    <AppShell lessonNumber={3}>
       <main className="lesson-two-home">
         <section className="lesson-two-home-hero">
           <div className="lesson-two-home-intro">
             <span>AI+교과 융합 프로젝트 · 초등 3~4학년</span>
             <h1>AI와 함께 만드는 우리 옛이야기 그림책</h1>
             <p>
-              옛이야기를 자세히 읽고, 사건 순서를 맞춘 뒤 내가 그리고 싶은 여섯 장면을 직접 기획합니다.
+              내가 기획한 장면에 필요한 문자·이미지·소리 자료를 구분하고, 우리 장면의 데이터 꾸러미를 직접 만듭니다.
             </p>
             <dl>
               <div><dt>수업</dt><dd>총 10차시</dd></div>
-              <div><dt>현재</dt><dd>2차시</dd></div>
-              <div><dt>단계</dt><dd>LOOK</dd></div>
+              <div><dt>현재</dt><dd>3차시</dd></div>
+              <div><dt>단계</dt><dd>EXPLORE</dd></div>
             </dl>
           </div>
 
           <div className="lesson-two-home-current">
-            <span>LESSON 02</span>
-            <strong>우리가 만들 이야기 정하기</strong>
-            <p>생성형 AI 없이, 교사가 검토한 고정 옛이야기로 활동합니다.</p>
+            <span>LESSON 03</span>
+            <strong>AI가 이해하는 데이터</strong>
+            <p>글·사진·고정 음원만 사용해, 장면을 또렷하게 만드는 자료를 살펴봅니다.</p>
             <div>
-              <Link to="/present/2">수업용 PPT</Link>
-              <Link to="/lesson/2">학생용 웹앱</Link>
+              <Link to="/present/3">수업용 PPT</Link>
+              <Link to="/lesson/3">학생용 웹앱</Link>
             </div>
-            <small>학생은 글을 길게 쓰지 않고 고르기·옮기기·말하기로 참여합니다.</small>
+            <small>학생은 긴 글 대신 분류하기·듣기·고르기로 참여합니다. 생성형 AI는 사용하지 않습니다.</small>
           </div>
         </section>
 
@@ -59,12 +59,20 @@ export default function HomePage() {
                 <Link to="/lesson/1">학생 웹앱 · 선택</Link>
               </nav>
             </article>
-            <article className="current">
+            <article>
               <span>02</span>
-              <div><small>현재 수업 · LOOK</small><h3>우리가 만들 이야기 정하기</h3><p>사건 카드의 순서를 맞추고 여섯 장면의 인물·장소·느낌·모습을 직접 고릅니다.</p></div>
+              <div><small>LOOK</small><h3>우리가 만들 이야기 정하기</h3><p>사건 카드의 순서를 맞추고 여섯 장면의 인물·장소·느낌·모습을 직접 고릅니다.</p></div>
               <nav aria-label="2차시 실행">
                 <Link to="/present/2">수업용 PPT</Link>
                 <Link to="/lesson/2">학생용 웹앱</Link>
+              </nav>
+            </article>
+            <article className="current">
+              <span>03</span>
+              <div><small>현재 수업 · EXPLORE</small><h3>AI가 이해하는 데이터</h3><p>문자·이미지·소리를 분류하고, 내가 고른 장면의 데이터 꾸러미를 완성합니다.</p></div>
+              <nav aria-label="3차시 실행">
+                <Link to="/present/3">수업용 PPT</Link>
+                <Link to="/lesson/3">학생용 웹앱</Link>
               </nav>
             </article>
           </div>
@@ -78,18 +86,18 @@ export default function HomePage() {
           <div className="section-heading">
             <span className="eyebrow">10차시 로드맵</span>
             <h2>한 차시씩 완성해 가는 그림책 프로젝트</h2>
-            <p>1·2차시가 열려 있으며, 다음 차시는 순서대로 연결합니다.</p>
+            <p>1~3차시가 열려 있으며, 다음 차시는 순서대로 연결합니다.</p>
           </div>
           <div className="roadmap-list">
             {lessons.map(([number, title, description, phase], index) => (
-              <article key={number} className={index < 2 ? 'roadmap-item active' : 'roadmap-item locked'}>
+              <article key={number} className={index < 3 ? 'roadmap-item active' : 'roadmap-item locked'}>
                 <div className="lesson-number">{number.padStart(2, '0')}</div>
                 <div className="lesson-info">
                   <span className={`phase-tag ${phase.toLowerCase()}`}>{phase}</span>
                   <h3>{title}</h3>
                   <p>{description}</p>
                 </div>
-                {index < 2 ? (
+                {index < 3 ? (
                   <Link className="lesson-link" to={`/present/${index + 1}`}>수업 PPT →</Link>
                 ) : (
                   <span className="lesson-link muted">순차 제작</span>
